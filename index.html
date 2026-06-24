@@ -3,400 +3,653 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clubworx Analysis — Urban Muaythai Knowledge Base</title>
+<title>Clubworx Knowledge Base — Urban Muaythai</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --red:#C8102E;--red-dark:#9e0c24;--red-light:#fdf0f2;
+  --red:#C8102E;
   --bg:#ffffff;--bg2:#f7f7f6;--bg3:#f1efea;
   --text:#1a1a1a;--text2:#555;--text3:#999;
-  --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);
+  --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.2);--border3:rgba(0,0,0,0.35);
   --radius:8px;--radius-lg:12px;
 }
 @media(prefers-color-scheme:dark){
   :root{
-    --bg:#1a1a1a;--bg2:#222;--bg3:#2a2a2a;
+    --bg:#1c1c1c;--bg2:#252525;--bg3:#2e2e2e;
     --text:#f0f0f0;--text2:#aaa;--text3:#666;
-    --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);
-    --red-light:#2a1010;
+    --border:rgba(255,255,255,0.09);--border2:rgba(255,255,255,0.16);--border3:rgba(255,255,255,0.28);
   }
-  .alert{background:#2a1010 !important}
-  .alert p{color:#f09595 !important}
-  .principle-box{background:#2a1010 !important}
-  .principle-box p{color:#f09595 !important}
-  .tag.critical{background:#4a1010;color:#f09595}
-  .tag.moderate{background:#3a2800;color:#fac775}
-  .tag.low{background:#0a2010;color:#97c459}
+  .alert{background:#2a1010!important}.alert p{color:#f09595!important}
+  .principle-box{background:#2a1010!important}.principle-box p{color:#f09595!important}
+  .tag.critical{background:#4a1010!important;color:#f09595!important}
+  .tag.moderate{background:#3a2800!important;color:#fac775!important}
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;display:flex;flex-direction:column}
-.kb{display:flex;flex:1;overflow:hidden}
+html,body{height:100%;overflow:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+.kb{display:flex;flex:1;overflow:hidden;height:100vh}
 
-/* Sidebar */
-.sidebar{width:240px;flex-shrink:0;border-right:0.5px solid var(--border);background:var(--bg2);display:flex;flex-direction:column;overflow:hidden}
-.sidebar-top{padding:16px 14px 12px;border-bottom:0.5px solid var(--border)}
-.gym-badge{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.gym-logo{width:32px;height:32px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;flex-shrink:0;letter-spacing:0.02em}
+/* ── Sidebar ── */
+.sidebar{width:245px;flex-shrink:0;border-right:0.5px solid var(--border);background:var(--bg2);display:flex;flex-direction:column;overflow:hidden}
+.sidebar-top{padding:16px 14px 13px;border-bottom:0.5px solid var(--border)}
+.gym-badge{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.gym-logo{width:32px;height:32px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;letter-spacing:0.02em}
 .gym-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
 .gym-sub{font-size:11px;color:var(--text3)}
 .search-wrap{position:relative}
-.search-wrap input{width:100%;padding:7px 10px 7px 30px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--bg);font-size:12.5px;color:var(--text);outline:none}
+.search-wrap input{width:100%;padding:7px 10px 7px 30px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--bg);font-size:12.5px;color:var(--text);outline:none;transition:border-color .15s}
 .search-wrap input:focus{border-color:var(--red)}
 .search-wrap i{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text3)}
-.nav-section{flex:1;overflow-y:auto;padding:6px 0 16px}
-.nav-section::-webkit-scrollbar{width:4px}
-.nav-section::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
-.nav-label{font-size:10px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--text3);padding:10px 14px 4px}
-.nav-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;font-size:13px;color:var(--text2);transition:background 0.1s;border-right:2px solid transparent}
+.nav-scroll{flex:1;overflow-y:auto;padding:4px 0 16px}
+.nav-scroll::-webkit-scrollbar{width:4px}
+.nav-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.nav-home{display:flex;align-items:center;gap:8px;padding:8px 14px;cursor:pointer;font-size:13px;color:var(--text2);border-right:2px solid transparent;margin-bottom:2px;border-bottom:0.5px solid var(--border)}
+.nav-home:hover{background:var(--bg);color:var(--text)}
+.nav-home.active{color:var(--red);font-weight:600;border-right-color:var(--red)}
+.cat-block{margin-bottom:1px}
+.cat-header{display:flex;align-items:center;gap:8px;padding:8px 14px 5px;cursor:pointer;user-select:none}
+.cat-header:hover .cat-label{color:var(--text)}
+.cat-icon{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.cat-label{font-size:10.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);flex:1}
+.cat-toggle{font-size:12px;color:var(--text3);transition:transform .2s}
+.cat-block.open .cat-toggle{transform:rotate(180deg)}
+.cat-items{display:none}
+.cat-block.open .cat-items{display:block}
+.nav-item{display:flex;align-items:center;gap:9px;padding:6px 14px 6px 22px;cursor:pointer;font-size:12.5px;color:var(--text2);border-right:2px solid transparent;transition:background .1s}
 .nav-item:hover{background:var(--bg);color:var(--text)}
 .nav-item.active{background:var(--bg);color:var(--red);font-weight:600;border-right-color:var(--red)}
-.step-badge{width:20px;height:20px;border-radius:5px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--text3);flex-shrink:0}
-.nav-item.active .step-badge{background:var(--red);color:#fff}
-.nav-item i.nav-icon{font-size:15px;flex-shrink:0}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);flex-shrink:0;transition:background .1s}
+.nav-item.active .nav-dot{background:var(--red)}
 
-/* Main */
+/* ── Main ── */
 .main{flex:1;overflow-y:auto;background:var(--bg)}
 .main::-webkit-scrollbar{width:6px}
 .main::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-.main-inner{max-width:660px;padding:32px 36px 48px}
-.page-tag{font-size:11px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.main-inner{max-width:660px;padding:32px 36px 56px}
+.page-tag{font-size:11px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;margin-bottom:8px}
 .page-title{font-size:26px;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.2}
-.page-desc{font-size:14.5px;color:var(--text2);line-height:1.65;margin-bottom:24px}
-.meta-row{display:flex;gap:18px;margin-bottom:28px;padding-bottom:22px;border-bottom:0.5px solid var(--border)}
+.page-desc{font-size:14.5px;color:var(--text2);line-height:1.65;margin-bottom:22px}
+.divider{height:0.5px;background:var(--border);margin-bottom:22px}
+.meta-row{display:flex;gap:18px;margin-bottom:22px;flex-wrap:wrap}
 .meta-pill{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text2)}
 .meta-pill i{font-size:15px;color:var(--text3)}
-.section-title{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;margin-top:22px}
-.step-block{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:12px}
+.section-title{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin:20px 0 10px}
+
+/* ── Home grid ── */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cat-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;cursor:pointer;transition:border-color .15s,background .15s}
+.cat-card:hover{border-color:var(--border3)}
+.cat-card-top{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.cat-card-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cat-card-name{font-size:13.5px;font-weight:600;color:var(--text)}
+.cat-card-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.cat-card-count{font-size:11px;color:var(--text3);margin-top:6px}
+
+/* ── Category page ── */
+.cat-page-header{display:flex;align-items:center;gap:13px;padding:16px 18px;border-radius:var(--radius-lg);margin-bottom:18px;border:0.5px solid transparent}
+.cat-page-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;background:rgba(255,255,255,0.25)}
+.cat-page-name{font-size:19px;font-weight:600}
+.cat-page-desc{font-size:13px;margin-top:2px;opacity:0.75}
+.step-link{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:8px;cursor:pointer;transition:border-color .15s}
+.step-link:hover{border-color:var(--border3)}
+.step-link-left{display:flex;align-items:center;gap:11px}
+.step-num{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;flex-shrink:0}
+.step-link-title{font-size:13.5px;font-weight:600;color:var(--text)}
+.step-link-desc{font-size:12px;color:var(--text2);margin-top:2px}
+.step-link i.arr{font-size:16px;color:var(--text3)}
+
+/* ── Article ── */
+.step-block{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:10px}
 .checklist{list-style:none}
-.checklist li{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--border);font-size:13.5px;color:var(--text);line-height:1.55}
+.checklist li{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:0.5px solid var(--border);font-size:13.5px;color:var(--text);line-height:1.55}
 .checklist li:last-child{border-bottom:none}
-.checklist li i{font-size:15px;color:var(--red);flex-shrink:0;margin-top:2px}
-.alert{background:#fff5f5;border:0.5px solid #f09595;border-left:3px solid var(--red);border-radius:var(--radius);padding:13px 15px;margin-top:14px}
-.alert-head{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+.checklist li i.ci{font-size:15px;flex-shrink:0;margin-top:2px}
+.alert{background:#fff5f5;border:0.5px solid #f09595;border-left:3px solid var(--red);border-radius:var(--radius);padding:12px 14px;margin-top:13px}
+.alert-head{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin-bottom:5px}
 .alert p{font-size:13px;color:#791F1F;line-height:1.65}
-.info-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:10px}
-.info-card-title{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:5px;display:flex;align-items:center;gap:8px}
-.info-card-title i{font-size:17px;color:var(--red)}
-.info-card p{font-size:13px;color:var(--text2);line-height:1.6}
+.tip-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:13px 15px;margin-top:10px;display:flex;gap:10px}
+.tip-box i{font-size:17px;color:var(--red);flex-shrink:0;margin-top:1px}
+.tip-box p{font-size:13px;color:var(--text2);line-height:1.6}
 .error-table{width:100%;border-collapse:collapse;font-size:13px}
-.error-table th{text-align:left;font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3);padding:8px 12px;border-bottom:0.5px solid var(--border)}
+.error-table th{text-align:left;font-size:10.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3);padding:8px 12px;border-bottom:0.5px solid var(--border)}
 .error-table td{padding:9px 12px;border-bottom:0.5px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5}
 .error-table tr:last-child td{border-bottom:none}
 .tag{display:inline-flex;align-items:center;padding:2px 9px;border-radius:100px;font-size:11px;font-weight:600}
 .tag.critical{background:#fde8ec;color:#9e0c24}
 .tag.moderate{background:#fef3e2;color:#7a4a00}
-.tag.low{background:#e8f5e9;color:#1b5e20}
-.principle-box{border-left:3px solid var(--red);padding:14px 18px;background:var(--red-light);border-radius:0 var(--radius) var(--radius) 0;margin-top:22px}
+.principle-box{border-left:3px solid var(--red);padding:14px 18px;background:#fff5f5;border-radius:0 var(--radius) var(--radius) 0;margin-top:22px}
 .principle-box p{font-size:13.5px;color:#791F1F;line-height:1.75}
-.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px}
-.ov-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px}
-.ov-card-label{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
-.ov-card-value{font-size:18px;font-weight:600;color:var(--text);margin-bottom:3px}
-.ov-card-desc{font-size:12px;color:var(--text2);line-height:1.5}
-.nav-footer{display:flex;justify-content:space-between;margin-top:32px;padding-top:18px;border-top:0.5px solid var(--border)}
-.nav-footer button{display:flex;align-items:center;gap:7px;font-size:12.5px;padding:7px 13px;border-radius:var(--radius);border:0.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:background 0.1s}
+.nav-footer{display:flex;justify-content:space-between;margin-top:30px;padding-top:18px;border-top:0.5px solid var(--border)}
+.nav-footer button{display:flex;align-items:center;gap:7px;font-size:12.5px;padding:7px 13px;border-radius:var(--radius);border:0.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;transition:background .1s}
 .nav-footer button:hover{background:var(--bg2);color:var(--text)}
 </style>
 </head>
 <body>
-
 <div class="kb">
+
+  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sidebar-top">
       <div class="gym-badge">
         <div class="gym-logo">UM</div>
         <div>
           <div class="gym-name">Urban Muaythai</div>
-          <div class="gym-sub">Knowledge Base</div>
+          <div class="gym-sub">Clubworx Knowledge Base</div>
         </div>
       </div>
       <div class="search-wrap">
         <i class="ti ti-search"></i>
-        <input type="text" placeholder="Search steps..." id="search-input" oninput="filterNav(this.value)">
+        <input type="text" id="search-input" placeholder="Search articles..." oninput="filterNav(this.value)">
       </div>
     </div>
-    <div class="nav-section" id="nav-section">
-      <div class="nav-label">Overview</div>
-      <div class="nav-item active" onclick="showPage('overview')" id="nav-overview">
-        <i class="ti ti-book nav-icon"></i>
-        Introduction
+    <div class="nav-scroll">
+      <div class="nav-home active" id="nav-home" onclick="showHome()">
+        <i class="ti ti-home" style="font-size:15px"></i> Home
       </div>
-      <div class="nav-label">13-Step Process</div>
+      <div id="nav-cats"></div>
     </div>
   </div>
+
+  <!-- MAIN -->
   <div class="main">
     <div class="main-inner" id="main-content"></div>
   </div>
 </div>
 
 <script>
-const steps = [
+const cats = [
   {
-    id:'s1', title:'Access recent activity', icon:'ti-layout-dashboard',
-    why:'This is the starting point of every review. Without accessing the right date range, you will miss activity and gaps will appear in your quality control.',
-    items:[
-      'Open Clubworx and navigate to Recent Activity at the top of the screen',
-      'Scroll down and click View All',
-      'Adjust the date filter to: Yesterday (or most recent day to review)'
-    ],
-    tip:'Always double-check the date filter before starting. It\'s easy to accidentally review the wrong day.'
-  },
-  {
-    id:'s2', title:'Review membership activity', icon:'ti-id-badge',
-    why:'Memberships are the core revenue driver. Any error here directly affects billing, member experience, and your financial reporting.',
-    items:[
-      'Filter activity to Memberships',
-      'Correct membership type has been selected',
-      'Start date is accurate',
-      'Payment schedule matches what the member agreed to',
-      'Notes have been added explaining the action taken',
-      'The membership aligns with what was actually sold',
-      'If any error found: correct it immediately',
-      'If debit day is wrong: remove and reapply with the correct schedule'
-    ],
-    tip:'When in doubt about what was sold, check the member conversation or ask the salesperson before correcting.'
-  },
-  {
-    id:'s3', title:'Cross-check new member spreadsheet', icon:'ti-table',
-    why:'Clubworx and the New Member Spreadsheet must stay in sync. Discrepancies cause confusion during Pipeline Parties and rollover conversations.',
-    items:[
-      'Member is recorded correctly in the New Member Spreadsheet',
-      'Status is correct: Rolled Over, No Rollover, or Short-Term Membership',
-      'Colour coding matches the member\'s actual status',
-      'Salesperson is recorded correctly',
-      'All dates are correct'
-    ],
-    tip:'Colour coding is your visual signal during team reviews — a wrong colour means the wrong person gets the wrong conversation.'
-  },
-  {
-    id:'s4', title:'Check waivers', icon:'ti-file-check',
-    why:'A missing waiver is a liability and a compliance failure. No one trains without one — full stop.',
-    items:[
-      'Every new member has a completed waiver on file',
-      'No one is training without a signed waiver (non-negotiable)',
-      'If waiver is missing: add "Waiver needed" note to spreadsheet and follow up with member immediately',
-      'Preferred debit date in waiver is recorded',
-      'Debit date in waiver matches what has been set in Clubworx'
-    ],
-    alert:'Training without a waiver is non-negotiable — this must be resolved before the member attends another session.'
-  },
-  {
-    id:'s5', title:'Check casual visits', icon:'ti-user-check',
-    why:'Casuals are warm leads. Without a follow-up note or task, they fall through the cracks and a potential membership is lost.',
-    items:[
-      'Waiver is signed for each casual visit',
-      'Payment has been completed for the session',
-      'Notes confirm the outcome: joined / not interested',
-      'If no follow-up note exists: create a task for the sales team immediately'
-    ],
-    tip:'A casual with no outcome note is a lead that hasn\'t been worked. Treat every casual as a conversion opportunity.'
-  },
-  {
-    id:'s6', title:'Check member setup (onboarding)', icon:'ti-user-plus',
-    why:'An incomplete member profile creates friction at check-in and signals to the member that the gym isn\'t paying attention.',
-    items:[
-      'Member number has been added to their profile',
-      'Profile photo has been taken',
-      'If photo is missing: add a flag in Clubworx — "Photo needed"',
-      'If member number is missing: add it from the profile ID'
-    ],
-    tip:'Photos matter for culture. A faceless profile means coaches can\'t recognise members by name — which kills the personal connection.'
-  },
-  {
-    id:'s7', title:'Review suspensions', icon:'ti-pause',
-    why:'Suspensions affect billing dates, automation timing, and rollover end dates. An unchecked suspension can trigger incorrect communications or billing.',
-    items:[
-      'Suspension dates are accurate',
-      'Reason for suspension is recorded in notes',
-      'If suspension impacts a Kickstarter trial: update the New Member Spreadsheet accordingly'
-    ],
-    tip:'A suspension that moves a member\'s end date but isn\'t updated in the spreadsheet will cause the wrong rollover conversation at the wrong time.'
-  },
-  {
-    id:'s8', title:'Manage errors and corrections', icon:'ti-tool',
-    why:'Errors left uncorrected compound. One wrong debit date today can cause a failed payment, a frustrated member, and a cancellation tomorrow.',
-    errors:[
-      {type:'Incorrect debit date', impact:'Member charged on wrong day — failed payment risk', severity:'critical'},
-      {type:'Missing suspension', impact:'Member billed during suspension period', severity:'critical'},
-      {type:'Incorrect membership applied', impact:'Wrong pricing or plan — trust issue with member', severity:'critical'},
-    ],
-    items:[
-      'Fix all errors immediately where possible',
-      'Add notes explaining every correction made',
-      'Escalate to Mel if the issue cannot be resolved at admin level',
-      'Track recurring errors — patterns indicate a training gap in the team'
+    id:'member-management',
+    label:'Member Management',
+    icon:'ti-users',
+    color:'#185FA5',
+    bg:'#dceefb',
+    desc:'Keeping active member records, memberships, and billing accurate in Clubworx every day.',
+    steps:[
+      {
+        id:'review-memberships',num:2,title:'Review membership activity',
+        short:'Audit every membership applied yesterday',
+        why:'Memberships are the core revenue driver. Any error here directly affects billing, member experience, and financial reporting.',
+        items:[
+          'Filter activity to Memberships in Recent Activity',
+          'Confirm the correct membership type has been selected',
+          'Confirm the start date is accurate',
+          'Confirm the payment schedule matches what the member agreed to',
+          'Confirm notes explain the action taken',
+          'Confirm the membership aligns with what was sold',
+          'If any error found: correct immediately',
+          'If debit day is wrong: remove and reapply with the correct schedule'
+        ],
+        tip:'When in doubt about what was sold, check the member conversation or ask the salesperson before correcting.'
+      },
+      {
+        id:'review-suspensions',num:7,title:'Review suspensions',
+        short:'Check all suspension dates and reasons',
+        why:'Suspensions affect billing dates, automation timing, and rollover end dates. An unchecked suspension triggers incorrect communications or billing.',
+        items:[
+          'Confirm suspension dates are accurate',
+          'Confirm reason for suspension is recorded in notes',
+          'If suspension impacts a Kickstarter trial: update the New Member Spreadsheet accordingly'
+        ],
+        tip:'A suspension that moves a member\'s end date but isn\'t updated in the spreadsheet will cause the wrong rollover conversation at the wrong time.'
+      },
+      {
+        id:'payments',num:10,title:'Payments & failed transactions',
+        short:'Catch failed payments and outstanding balances',
+        why:'Failed payments accumulate fees and create tension. Early identification is the difference between a retained member and a cancellation.',
+        items:[
+          'Check for failed payments',
+          'Check for outstanding balances',
+          'Check for pending bank update forms',
+          'If bank form pending: follow up via SMS',
+          'If multiple failed payments: create a task for a phone call',
+          'Consider escalation — payment plan or assistance — for complex situations'
+        ],
+        tip:'Failed payment fees accumulate. The longer you wait, the harder the conversation — and the more likely the member cancels out of embarrassment.'
+      },
+      {
+        id:'errors',num:8,title:'Errors and corrections',
+        short:'Fix errors immediately and document all changes',
+        why:'Errors left uncorrected compound. One wrong debit date today causes a failed payment, a frustrated member, and a cancellation tomorrow.',
+        errors:[
+          {type:'Incorrect debit date',impact:'Member charged on wrong day — failed payment risk',severity:'critical'},
+          {type:'Missing suspension',impact:'Member billed during suspension period',severity:'critical'},
+          {type:'Incorrect membership applied',impact:'Wrong pricing or plan — trust issue with member',severity:'critical'}
+        ],
+        items:[
+          'Fix all errors immediately where possible',
+          'Add notes explaining every correction made',
+          'Escalate to Mel if the issue cannot be resolved at admin level',
+          'Track recurring errors — patterns indicate a training gap in the team'
+        ]
+      }
     ]
   },
   {
-    id:'s9', title:'Check automations', icon:'ti-robot',
-    why:'Automations run on dates. If a member\'s timeline changes and automations aren\'t adjusted, they receive the wrong message at the wrong time.',
-    items:[
-      'Review automations for all members whose timelines were affected',
-      'Ensure day-28 rollover emails align with the correct dates',
-      'If a member has been delayed or suspended: stop or adjust the automation immediately'
-    ],
-    alert:'Failure to adjust automations can result in incorrect communication being sent to members at the wrong time. Always check automations when a member\'s timeline has changed.'
+    id:'member-enquiries',
+    label:'Member Enquiries',
+    icon:'ti-message-circle',
+    color:'#0F6E56',
+    bg:'#d0f0e4',
+    desc:'Managing casual visits, inbound interest, and converting warm enquiries into memberships.',
+    steps:[
+      {
+        id:'casual-visits',num:5,title:'Casual visits',
+        short:'Review every casual and confirm follow-up',
+        why:'Casuals are warm leads. Without a follow-up note or task, they fall through the cracks and a potential membership is lost.',
+        items:[
+          'Confirm waiver is signed for each casual visit',
+          'Confirm payment has been completed for the session',
+          'Check notes confirm the outcome: joined / not interested',
+          'If no follow-up note exists: create a task for the sales team immediately'
+        ],
+        tip:'A casual with no outcome note is a lead that hasn\'t been worked. Treat every casual as a conversion opportunity.'
+      },
+      {
+        id:'review-notes-enquiry',num:11,title:'Review notes for leads',
+        short:'Check all notes for unactioned lead follow-ups',
+        why:'Notes are where the truth lives. A lead flagged in a note but never followed up is a membership lost.',
+        items:[
+          'Read through all recent notes',
+          'Look for leads without a follow-up task assigned',
+          'Look for requests not actioned',
+          'If unclear: investigate the member profile and confirm action was taken'
+        ],
+        tip:'A note that was written and never actioned is worse than no note — it means the team saw the opportunity and ignored it.'
+      }
+    ]
   },
   {
-    id:'s10', title:'Review payments & failed transactions', icon:'ti-credit-card',
-    why:'Failed payments accumulate fees and create tension with members. Early identification and action is the difference between a retained member and a cancellation.',
-    items:[
-      'Check for failed payments',
-      'Check for outstanding balances',
-      'Check for pending bank update forms',
-      'If bank form is pending: follow up with the member via SMS',
-      'If multiple failed payments: create a task for a phone call',
-      'Consider escalation (payment plan or assistance) for complex situations'
-    ],
-    tip:'Failed payment fees accumulate. The longer you wait, the harder the conversation — and the more likely the member cancels out of embarrassment.'
+    id:'new-members',
+    label:'New Members',
+    icon:'ti-user-plus',
+    color:'#854F0B',
+    bg:'#fce8c8',
+    desc:'Onboarding every new member correctly — waivers, profiles, spreadsheet records, and automations.',
+    steps:[
+      {
+        id:'access-activity',num:1,title:'Access recent activity',
+        short:'Set the date filter before you start reviewing',
+        why:'This is the starting point of every review. Without the right date range, you will miss activity and gaps appear in your quality control.',
+        items:[
+          'Open Clubworx and navigate to Recent Activity at the top of the screen',
+          'Scroll down and click View All',
+          'Set date filter to: Yesterday (or most recent day to review)'
+        ],
+        tip:'Always double-check the date filter before starting. It\'s easy to accidentally review the wrong day.'
+      },
+      {
+        id:'check-waivers',num:4,title:'Check waivers',
+        short:'Every new member must have a signed waiver',
+        why:'A missing waiver is a liability and compliance failure. No one trains without one — full stop.',
+        items:[
+          'Confirm every new member has a completed waiver on file',
+          'Confirm no one is training without a signed waiver (non-negotiable)',
+          'If waiver missing: add "Waiver needed" note and follow up immediately',
+          'Confirm preferred debit date in waiver is recorded',
+          'Confirm debit date in waiver matches what is set in Clubworx'
+        ],
+        alert:'Training without a waiver is non-negotiable — this must be resolved before the member attends another session.'
+      },
+      {
+        id:'member-setup',num:6,title:'Member setup (onboarding)',
+        short:'Profile photo, member number, and flags',
+        why:'An incomplete profile creates friction at check-in and signals to the member that the gym isn\'t paying attention.',
+        items:[
+          'Confirm member number has been added to their profile',
+          'Confirm profile photo has been taken',
+          'If photo missing: add flag in Clubworx — "Photo needed"',
+          'If member number missing: add it from the profile ID'
+        ],
+        tip:'Photos matter for culture. A faceless profile means coaches can\'t recognise members by name — which kills the personal connection.'
+      },
+      {
+        id:'cross-check',num:3,title:'Cross-check new member spreadsheet',
+        short:'Sync Clubworx with the New Member Spreadsheet',
+        why:'Clubworx and the New Member Spreadsheet must stay in sync. Discrepancies cause confusion during Pipeline Parties and rollover conversations.',
+        items:[
+          'Confirm member is recorded in the New Member Spreadsheet',
+          'Confirm status: Rolled Over, No Rollover, or Short-Term Membership',
+          'Confirm colour coding matches actual status',
+          'Confirm salesperson is recorded correctly',
+          'Confirm all dates are correct'
+        ],
+        tip:'Colour coding is your visual signal during team reviews — a wrong colour means the wrong conversation goes to the wrong person.'
+      }
+    ]
   },
   {
-    id:'s11', title:'Review notes', icon:'ti-notes',
-    why:'Notes are where the truth lives. If a team member flagged something and it wasn\'t actioned, the member experience has a gap — and gaps cost retention.',
-    items:[
-      'Read through all recent notes left by staff',
-      'Look for missed actions — e.g. induction not completed',
-      'Look for leads without a follow-up assigned',
-      'Look for requests that haven\'t been actioned',
-      'Look for red flags that need escalation to Mel',
-      'If something is unclear: investigate the member profile and confirm the action has been taken'
-    ],
-    tip:'A note that was written and never actioned is worse than no note — it means the team saw the problem and ignored it.'
+    id:'tasks-notes',
+    label:'Tasks & Notes',
+    icon:'ti-checkbox',
+    color:'#533AB7',
+    bg:'#e5e3fc',
+    desc:'Reviewing staff notes, creating follow-up tasks, and making sure nothing falls through the cracks.',
+    steps:[
+      {
+        id:'review-notes',num:11,title:'Review all notes',
+        short:'Read every note and find missed actions',
+        why:'Notes are where the truth lives. If a team member flagged something and it wasn\'t actioned, the member experience has a gap — and gaps cost retention.',
+        items:[
+          'Read through all recent notes left by staff',
+          'Look for missed actions — e.g. induction not completed',
+          'Look for leads without a follow-up assigned',
+          'Look for requests that haven\'t been actioned',
+          'Look for red flags requiring escalation to Mel',
+          'If unclear: investigate the member profile and confirm action was taken'
+        ],
+        tip:'A note written and never actioned is worse than no note — it means the team saw the problem and ignored it.'
+      },
+      {
+        id:'create-tasks',num:12,title:'Create and assign tasks',
+        short:'Every follow-up needs a task with an owner and due date',
+        why:'If a follow-up has no task, it doesn\'t exist. Every action that can\'t be completed now must become a task with a clear owner and due date.',
+        items:[
+          'Create a task in Clubworx for each required follow-up',
+          'Assign task to the correct staff member',
+          'Set a clear action: call, follow-up, or booking',
+          'Set a due date on every task',
+          'Confirm no lead or member is left without an assigned action'
+        ],
+        tip:'Unassigned tasks and missing due dates are the two biggest reasons follow-ups are missed. Both are non-negotiable.'
+      },
+      {
+        id:'final-review',num:13,title:'Final review',
+        short:'Your quality gate before closing the daily review',
+        why:'This is your quality gate. Don\'t close the review until everything is confirmed.',
+        items:[
+          'All memberships have been reviewed',
+          'All waivers have been checked',
+          'All errors have been corrected',
+          'All follow-ups have been assigned as tasks',
+          'No activity from the review date has been missed'
+        ]
+      }
+    ]
   },
   {
-    id:'s12', title:'Create and assign tasks', icon:'ti-checkbox',
-    why:'If a follow-up has no task, it doesn\'t exist. Every action that can\'t be completed now must become a task with a clear owner and due date.',
-    items:[
-      'Create a task in Clubworx for each required follow-up',
-      'Assign task to the correct staff member',
-      'Set a clear action description: call, follow-up, or booking',
-      'Set a due date on every task',
-      'Confirm no lead or member is left without an assigned action'
-    ],
-    tip:'Unassigned tasks and missing due dates are the two biggest reasons follow-ups are missed. Both are non-negotiable.'
+    id:'compliance',
+    label:'Compliance & Risk',
+    icon:'ti-shield-check',
+    color:'#A32D2D',
+    bg:'#fad5d5',
+    desc:'Non-negotiable checks that protect the gym legally, financially, and reputationally.',
+    steps:[
+      {
+        id:'comp-waivers',num:4,title:'Waiver compliance',
+        short:'No member trains without a signed waiver',
+        why:'A missing waiver exposes the gym to legal liability. This is non-negotiable regardless of how long the member has been attending.',
+        items:[
+          'Confirm every new member has a completed waiver',
+          'Confirm no one is attending class without a signed waiver',
+          'If waiver missing: stop training until resolved and note immediately'
+        ],
+        alert:'Training without a waiver is non-negotiable. This is a legal requirement, not an admin preference.'
+      },
+      {
+        id:'comp-payments',num:10,title:'Failed payment monitoring',
+        short:'Catch failed payments before fees accumulate',
+        why:'Unresolved failed payments create member tension, accumulate penalty fees, and are a leading indicator of upcoming cancellation.',
+        items:[
+          'Check for all failed payments daily',
+          'Check for outstanding balances',
+          'Follow up bank update forms via SMS before fees accumulate',
+          'Escalate repeat failures with a phone call task'
+        ],
+        tip:'Most members don\'t cancel over money — they cancel over embarrassment. Catching a failed payment early and handling it warmly protects the relationship.'
+      },
+      {
+        id:'comp-errors',num:8,title:'Error escalation protocol',
+        short:'Know when to fix it yourself vs escalate to Mel',
+        why:'Not every error can or should be fixed at admin level. Knowing the escalation threshold protects both the member experience and the business.',
+        items:[
+          'Fix minor errors immediately and document with notes',
+          'Escalate to Mel: membership applied incorrectly, payment dispute, member complaint, anything affecting billing over $50',
+          'Add notes on every correction — even small ones',
+          'Track error patterns weekly to identify team training gaps'
+        ],
+        errors:[
+          {type:'Incorrect debit date',impact:'Failed payment, member frustration',severity:'critical'},
+          {type:'Incorrect membership type',impact:'Wrong billing, wrong plan',severity:'critical'},
+          {type:'Missing suspension',impact:'Billing during suspension',severity:'critical'},
+          {type:'Missing waiver',impact:'Legal liability',severity:'critical'},
+          {type:'Missing member photo',impact:'Onboarding gap, culture impact',severity:'moderate'}
+        ]
+      }
+    ]
   },
   {
-    id:'s13', title:'Final review', icon:'ti-circle-check',
-    why:'This is your quality gate. Don\'t close the review until everything on this list is confirmed.',
-    items:[
-      'All memberships have been reviewed',
-      'All waivers have been checked',
-      'All errors have been corrected',
-      'All follow-ups have been assigned as tasks',
-      'No activity from the review date has been missed'
+    id:'automations',
+    label:'Automations',
+    icon:'ti-robot',
+    color:'#3B6D11',
+    bg:'#d4edbc',
+    desc:'Managing Clubworx automations so members always receive the right message at the right time.',
+    steps:[
+      {
+        id:'auto-review',num:9,title:'Daily automation check',
+        short:'Adjust any automation affected by timeline changes',
+        why:'Automations run on fixed dates. A suspension, delayed start, or rollover change that isn\'t reflected in automations sends the wrong message at the wrong time — and breaks trust.',
+        items:[
+          'Review automations for any member whose timeline changed',
+          'Check day-28 rollover emails align with correct end dates',
+          'If member suspended: pause or shift automations to match new timeline',
+          'If member delayed: recalculate and update automation trigger dates',
+          'Document all automation changes in notes'
+        ],
+        alert:'Failure to adjust automations can result in incorrect communications being sent at the wrong time. Always check automations when a member\'s timeline has changed.'
+      },
+      {
+        id:'auto-rollover',num:9,title:'Rollover email alignment',
+        short:'Day-28 emails must match actual Kickstarter end dates',
+        why:'The day-28 rollover email is a critical conversion touchpoint. If it fires on the wrong date, the member receives a confusing message and the rollover conversation loses momentum.',
+        items:[
+          'For every new Kickstarter member: confirm automation end date matches their actual KS end date',
+          'If KS end date has shifted (suspension, late start): update automation immediately',
+          'Cross-reference with New Member Spreadsheet dates before confirming'
+        ],
+        tip:'The rollover email is often the first formal touchpoint about committing to membership. Getting the timing right is part of the conversion process.'
+      }
     ]
   }
 ];
 
-function buildNav() {
-  const nav = document.getElementById('nav-section');
-  steps.forEach((s, i) => {
-    const d = document.createElement('div');
-    d.className = 'nav-item';
-    d.id = 'nav-' + s.id;
-    d.setAttribute('data-title', s.title.toLowerCase());
-    d.innerHTML = `<div class="step-badge">${i+1}</div><span>${s.title}</span>`;
-    d.onclick = () => showPage(s.id);
-    nav.appendChild(d);
+/* ── Build sidebar nav ── */
+function buildNav(){
+  const container=document.getElementById('nav-cats');
+  cats.forEach(cat=>{
+    const block=document.createElement('div');
+    block.className='cat-block open';
+    block.id='cat-block-'+cat.id;
+    const items=cat.steps.map(step=>`
+      <div class="nav-item" id="nav-${step.id}"
+           onclick="showStep('${cat.id}','${step.id}')"
+           data-search="${step.title.toLowerCase()} ${cat.label.toLowerCase()} ${(step.short||'').toLowerCase()}">
+        <div class="nav-dot"></div>${step.title}
+      </div>`).join('');
+    block.innerHTML=`
+      <div class="cat-header" onclick="toggleCat('${cat.id}')">
+        <div class="cat-icon" style="background:${cat.bg}">
+          <i class="ti ${cat.icon}" style="color:${cat.color};font-size:13px"></i>
+        </div>
+        <span class="cat-label">${cat.label}</span>
+        <i class="ti ti-chevron-down cat-toggle"></i>
+      </div>
+      <div class="cat-items">${items}</div>`;
+    container.appendChild(block);
   });
 }
 
-function filterNav(q) {
-  const lower = q.toLowerCase();
-  steps.forEach(s => {
-    const el = document.getElementById('nav-' + s.id);
-    if (!el) return;
-    el.style.display = (!q || s.title.toLowerCase().includes(lower)) ? '' : 'none';
-  });
+function toggleCat(id){
+  document.getElementById('cat-block-'+id).classList.toggle('open');
 }
 
-function setActive(id) {
-  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-  const el = document.getElementById('nav-' + id);
-  if (el) { el.classList.add('active'); el.scrollIntoView({block:'nearest'}); }
-}
-
-function showPage(id) {
-  setActive(id);
-  const c = document.getElementById('main-content');
-  c.scrollTop = 0;
-  document.querySelector('.main').scrollTo(0,0);
-
-  if (id === 'overview') {
-    c.innerHTML = `
-      <div class="page-tag">Knowledge Base</div>
-      <div class="page-title">Clubworx Analysis</div>
-      <div class="page-desc">The daily quality control process that keeps memberships accurate, member experience intact, and retention protected. This is not admin work — it is the operational backbone of the gym.</div>
-      <div class="meta-row">
-        <div class="meta-pill"><i class="ti ti-clock"></i> Daily</div>
-        <div class="meta-pill"><i class="ti ti-user"></i> Reception / Admin</div>
-        <div class="meta-pill"><i class="ti ti-list-check"></i> 13 Steps</div>
-      </div>
-      <div class="section-title" style="margin-top:0">What this process covers</div>
-      <div class="overview-grid">
-        <div class="ov-card"><div class="ov-card-label">Memberships</div><div class="ov-card-value">Steps 1–3</div><div class="ov-card-desc">Access, review, and cross-check every membership applied</div></div>
-        <div class="ov-card"><div class="ov-card-label">Waivers & Casuals</div><div class="ov-card-value">Steps 4–5</div><div class="ov-card-desc">Compliance, waiver completion, and casual lead follow-up</div></div>
-        <div class="ov-card"><div class="ov-card-label">Onboarding & Setup</div><div class="ov-card-value">Steps 6–7</div><div class="ov-card-desc">Member profiles, photos, numbers, and suspensions</div></div>
-        <div class="ov-card"><div class="ov-card-label">Errors & Automations</div><div class="ov-card-value">Steps 8–9</div><div class="ov-card-desc">Fix errors immediately and audit automation timing</div></div>
-        <div class="ov-card"><div class="ov-card-label">Payments & Notes</div><div class="ov-card-value">Steps 10–11</div><div class="ov-card-desc">Failed transactions, outstanding balances, and note review</div></div>
-        <div class="ov-card"><div class="ov-card-label">Tasks & Final Check</div><div class="ov-card-value">Steps 12–13</div><div class="ov-card-desc">Assign all follow-ups and confirm nothing was missed</div></div>
-      </div>
-      <div class="section-title">Why this process exists</div>
-      <div class="info-card"><div class="info-card-title"><i class="ti ti-shield-check"></i>Quality control</div><p>Every membership, waiver, payment, and note is checked daily to catch errors before they impact the member experience.</p></div>
-      <div class="info-card"><div class="info-card-title"><i class="ti ti-heart"></i>Member experience protection</div><p>When Clubworx is wrong, the member experience breaks — wrong billing, missed onboarding, incorrect communications.</p></div>
-      <div class="info-card"><div class="info-card-title"><i class="ti ti-trending-up"></i>Retention protection</div><p>Most cancellations don't start with a decision — they start with a friction point that was never caught and corrected.</p></div>
-      <div class="principle-box"><p><strong>Key principle:</strong> Clubworx Analysis is not admin work. It is quality control, member experience protection, and retention protection. If something is wrong in Clubworx — the member experience breaks, the system breaks, and the results drop.</p></div>
-    `;
+function filterNav(q){
+  const lower=q.toLowerCase();
+  if(!q){
+    document.querySelectorAll('.nav-item').forEach(el=>el.style.display='');
+    document.querySelectorAll('.cat-block').forEach(el=>el.style.display='');
     return;
   }
+  cats.forEach(cat=>{
+    let any=false;
+    cat.steps.forEach(step=>{
+      const el=document.getElementById('nav-'+step.id);
+      if(!el)return;
+      const m=(step.title+' '+cat.label+' '+(step.short||'')).toLowerCase().includes(lower);
+      el.style.display=m?'':'none';
+      if(m)any=true;
+    });
+    const b=document.getElementById('cat-block-'+cat.id);
+    if(b){b.style.display=any?'':'none';}
+  });
+}
 
-  const si = steps.findIndex(s => s.id === id);
-  if (si === -1) return;
-  const s = steps[si];
+function setActive(id){
+  document.querySelectorAll('.nav-item,.nav-home').forEach(el=>el.classList.remove('active'));
+  const el=document.getElementById('nav-'+id)||document.getElementById('nav-home');
+  if(el){el.classList.add('active');el.scrollIntoView({block:'nearest',behavior:'smooth'});}
+}
 
-  let html = `
-    <div class="page-tag">Step ${si+1} of 13</div>
-    <div class="page-title">${s.title}</div>
-    <div class="page-desc">${s.why}</div>
+function scrollTop(){document.querySelector('.main').scrollTo(0,0);}
+
+/* ── Pages ── */
+function showHome(){
+  setActive('home');
+  scrollTop();
+  document.getElementById('main-content').innerHTML=`
+    <div class="page-tag" style="color:var(--red)">Clubworx Knowledge Base</div>
+    <div class="page-title">Daily Activity Review</div>
+    <div class="page-desc">Everything your team needs to run a clean Clubworx review every day — structured by category so you can jump straight to what matters.</div>
+    <div class="divider"></div>
+    <div class="meta-row">
+      <div class="meta-pill"><i class="ti ti-clock"></i>Daily</div>
+      <div class="meta-pill"><i class="ti ti-user"></i>Reception / Admin</div>
+      <div class="meta-pill"><i class="ti ti-layout-grid"></i>6 Categories</div>
+    </div>
+    <div class="section-title" style="margin-top:0">Browse by category</div>
+    <div class="cat-grid">
+      ${cats.map(cat=>`
+        <div class="cat-card" onclick="showCat('${cat.id}')">
+          <div class="cat-card-top">
+            <div class="cat-card-icon" style="background:${cat.bg}">
+              <i class="ti ${cat.icon}" style="color:${cat.color};font-size:16px"></i>
+            </div>
+            <div class="cat-card-name">${cat.label}</div>
+          </div>
+          <div class="cat-card-desc">${cat.desc}</div>
+          <div class="cat-card-count">${cat.steps.length} article${cat.steps.length!==1?'s':''}</div>
+        </div>`).join('')}
+    </div>
+    <div class="principle-box">
+      <p><strong>Key principle:</strong> Clubworx Analysis is not admin work. It is quality control, member experience protection, and retention protection. If something is wrong in Clubworx — the member experience breaks, the system breaks, and the results drop.</p>
+    </div>`;
+}
+
+function showCat(catId){
+  const cat=cats.find(c=>c.id===catId);
+  if(!cat)return;
+  setActive('home');
+  scrollTop();
+  document.getElementById('main-content').innerHTML=`
+    <div class="page-tag" style="color:${cat.color}">Category</div>
+    <div class="cat-page-header" style="background:${cat.bg};border-color:${cat.bg}">
+      <div class="cat-page-icon">
+        <i class="ti ${cat.icon}" style="color:${cat.color}"></i>
+      </div>
+      <div>
+        <div class="cat-page-name" style="color:${cat.color}">${cat.label}</div>
+        <div class="cat-page-desc" style="color:${cat.color}">${cat.desc}</div>
+      </div>
+    </div>
+    ${cat.steps.map(step=>`
+      <div class="step-link" onclick="showStep('${catId}','${step.id}')">
+        <div class="step-link-left">
+          <div class="step-num" style="background:${cat.color}">${step.num}</div>
+          <div>
+            <div class="step-link-title">${step.title}</div>
+            <div class="step-link-desc">${step.short}</div>
+          </div>
+        </div>
+        <i class="ti ti-chevron-right arr"></i>
+      </div>`).join('')}`;
+}
+
+function showStep(catId,stepId){
+  const cat=cats.find(c=>c.id===catId);
+  if(!cat)return;
+  const step=cat.steps.find(s=>s.id===stepId);
+  if(!step)return;
+  setActive(stepId);
+  scrollTop();
+
+  let html=`
+    <div class="page-tag" style="color:${cat.color}">${cat.label}</div>
+    <div class="page-title">${step.title}</div>
+    <div class="page-desc">${step.why}</div>
+    <div class="divider"></div>
     <div class="section-title" style="margin-top:0">What to do</div>
     <div class="step-block">
       <ul class="checklist">
-        ${s.items.map(item => `<li><i class="ti ti-arrow-right"></i><span>${item}</span></li>`).join('')}
+        ${step.items.map(item=>`
+          <li>
+            <i class="ti ti-arrow-right ci" style="color:${cat.color}"></i>
+            <span>${item}</span>
+          </li>`).join('')}
       </ul>
-      ${s.alert ? `<div class="alert"><div class="alert-head"><i class="ti ti-bolt"></i>Key insight</div><p>${s.alert}</p></div>` : ''}
-    </div>
-  `;
+      ${step.alert?`
+        <div class="alert">
+          <div class="alert-head"><i class="ti ti-bolt"></i>Key insight</div>
+          <p>${step.alert}</p>
+        </div>`:''}
+    </div>`;
 
-  if (s.errors) {
-    html += `
+  if(step.errors){
+    html+=`
       <div class="section-title">Common errors to watch for</div>
       <div class="step-block" style="padding:0;overflow:hidden">
         <table class="error-table">
-          <thead><tr><th>Error type</th><th>Impact</th><th>Severity</th></tr></thead>
+          <thead><tr><th>Error</th><th>Impact</th><th>Severity</th></tr></thead>
           <tbody>
-            ${s.errors.map(e => `<tr><td>${e.type}</td><td>${e.impact}</td><td><span class="tag ${e.severity}">${e.severity}</span></td></tr>`).join('')}
+            ${step.errors.map(e=>`
+              <tr>
+                <td>${e.type}</td>
+                <td>${e.impact}</td>
+                <td><span class="tag ${e.severity}">${e.severity}</span></td>
+              </tr>`).join('')}
           </tbody>
         </table>
       </div>`;
   }
 
-  if (s.tip) {
-    html += `<div class="info-card" style="margin-top:16px"><div class="info-card-title"><i class="ti ti-bulb"></i>Pro tip</div><p>${s.tip}</p></div>`;
+  if(step.tip){
+    html+=`
+      <div class="tip-box">
+        <i class="ti ti-bulb"></i>
+        <p>${step.tip}</p>
+      </div>`;
   }
 
-  const prev = si > 0 ? steps[si-1] : null;
-  const next = si < steps.length-1 ? steps[si+1] : null;
-  html += `
+  const si=cat.steps.findIndex(s=>s.id===stepId);
+  const prev=si>0?cat.steps[si-1]:null;
+  const next=si<cat.steps.length-1?cat.steps[si+1]:null;
+  html+=`
     <div class="nav-footer">
-      <div>${prev ? `<button onclick="showPage('${prev.id}')"><i class="ti ti-arrow-left"></i> Step ${si} — ${prev.title}</button>` : '<span></span>'}</div>
-      <div>${next ? `<button onclick="showPage('${next.id}')">Step ${si+2} — ${next.title} <i class="ti ti-arrow-right"></i></button>` : '<span></span>'}</div>
+      <div>${prev
+        ?`<button onclick="showStep('${catId}','${prev.id}')"><i class="ti ti-arrow-left"></i>${prev.title}</button>`
+        :`<button onclick="showCat('${catId}')"><i class="ti ti-arrow-left"></i>Back to ${cat.label}</button>`}
+      </div>
+      <div>${next
+        ?`<button onclick="showStep('${catId}','${next.id}')">${next.title}<i class="ti ti-arrow-right"></i></button>`
+        :''}
+      </div>
     </div>`;
 
-  c.innerHTML = html;
+  document.getElementById('main-content').innerHTML=html;
 }
 
 buildNav();
-showPage('overview');
+showHome();
 </script>
 </body>
 </html>
