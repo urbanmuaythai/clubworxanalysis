@@ -126,6 +126,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
 .nav-footer{display:flex;justify-content:space-between;margin-top:30px;padding-top:18px;border-top:0.5px solid var(--border)}
 .nav-footer button{display:flex;align-items:center;gap:7px;font-size:12.5px;padding:7px 13px;border-radius:var(--radius);border:0.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;transition:background .1s}
 .nav-footer button:hover{background:var(--bg2);color:var(--text)}
+
+/* Reading layout and responsive navigation */
+:root{--bg:#fff;--bg2:#f5f7fb;--bg3:#eaf0f6;--text:#152239;--text2:#526078;--text3:#64748b;--border:#e0e6ef;--border2:#c5cfde;--radius:10px;--radius-lg:16px}
+body{color-scheme:light;font-size:15px}
+.sidebar{width:300px;background:#111f35;color:#fff;border:0}
+.sidebar-top{padding:24px 20px;border-color:#ffffff20}
+.gym-logo{width:42px;height:42px;border-radius:12px;box-shadow:0 5px 20px #0002}
+.gym-name{color:#fff;font-size:15px}.gym-sub{color:#b5c1d3;font-size:12px}
+.search-wrap input{padding:11px 12px 11px 34px;font-size:14px;border:1px solid #ffffff35;background:#ffffff0d;color:#fff}
+.search-wrap input::placeholder{color:#b5c1d3}.search-wrap i{color:#b5c1d3}
+.nav-scroll{padding:10px 10px 24px}.nav-home,.nav-item{border:0;border-radius:8px;margin:2px 0;padding:10px 12px;color:#c8d3e4;font-size:13px;line-height:1.45}
+.nav-home:hover,.nav-item:hover{background:#ffffff0c;color:#fff}.nav-home.active,.nav-item.active{background:#ffffff16;color:#fff;box-shadow:inset 3px 0 var(--red)}
+.cat-header{padding:16px 10px 7px}.cat-label{color:#9fb0c9;font-size:10px}.cat-header:hover .cat-label{color:#fff}.cat-toggle{color:#9fb0c9}.nav-dot{background:#71829c}.nav-item.active .nav-dot{background:#ff617b}
+.main{background:#f5f7fb}.main-inner{max-width:1100px;margin:auto;padding:42px 48px 64px}.page-title{font-size:clamp(26px,3vw,38px);font-weight:750;letter-spacing:-.035em}.page-desc{font-size:16px;max-width:780px;line-height:1.8}.page-tag{font-size:11px;margin-bottom:12px}
+.meta-row{gap:10px}.meta-pill{background:white;padding:9px 12px;border:1px solid var(--border);border-radius:8px}
+.section-title{font-size:11px;margin:28px 0 12px;color:#526078}.cat-grid{gap:16px}.cat-card,.info-card{background:#fff;border:1px solid var(--border);padding:20px;box-shadow:0 3px 12px #14213a04}
+.cat-card:hover,.step-link:hover{border-color:#a8b7cd;box-shadow:0 8px 24px #14213a0c;transform:translateY(-2px)}.cat-card{transition:transform .15s,box-shadow .15s}.cat-card-name{font-size:16px}.cat-card-desc,.info-card p{font-size:13.5px;line-height:1.7}.cat-card-count{font-size:12px;margin-top:12px}.cat-card-icon{width:38px;height:38px}.info-row{gap:16px}
+.step-block,.sub-section,.step-link,.tip-box{background:#fff;border:1px solid var(--border)}.step-block{padding:22px}.sub-section-header{padding:16px 20px}.sub-title{font-size:15px}.sub-section .checklist{padding:8px 20px 16px}.checklist li{font-size:14.5px;padding:11px 0;line-height:1.75}.alert{background:#fff5f5!important}.alert p,.principle-box p{color:#791f1f!important}.principle-box{background:#fff5f5!important}.tag.critical{background:#fde8ec!important;color:#9e0c24!important}.tag.moderate{background:#fef3e2!important;color:#7a4a00!important}.tip-box p,.alert p{font-size:14px}
+.step-link{padding:16px 20px;transition:transform .15s,box-shadow .15s}.step-link-title{font-size:15px}.step-link-desc{font-size:13px;line-height:1.5}.error-table,.escalate-table{font-size:14px;min-width:520px}.error-table th,.escalate-table th{padding:13px 16px}.error-table td,.escalate-table td{padding:14px 16px}.step-block:has(table){overflow:auto!important}.nav-footer{gap:12px}.nav-footer button{background:white;line-height:1.45;text-align:left;padding:11px 14px}
+.mobile-menu{display:none}.utility-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}.utility-row button,.utility-row a{font:600 12px inherit;font-size:12px;color:#526078;background:white;border:1px solid var(--border);border-radius:8px;padding:10px 13px;cursor:pointer;text-decoration:none}.utility-row a{background:#152239;color:#fff;border-color:#152239}.search-feedback{font-size:12px;color:#c8d3e4;padding:10px 4px}.search-feedback:empty{display:none}
+[role=button]:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #e59a23;outline-offset:3px}
+@media(max-width:760px){.kb{flex-direction:column}.sidebar{width:100%;max-height:60vh;flex-shrink:0}.sidebar-top{padding:14px 18px}.gym-badge{margin-bottom:10px}.gym-logo{width:34px;height:34px}.mobile-menu{display:block;margin-left:auto;border:1px solid #ffffff35;background:transparent;color:white;border-radius:8px;padding:8px 12px}.nav-scroll{display:none;max-height:35vh}.sidebar.menu-open .nav-scroll{display:block}.main-inner{padding:24px 18px 44px}.cat-grid,.info-row{grid-template-columns:1fr}.page-desc{font-size:14.5px}.meta-pill{font-size:11px}.nav-footer{flex-direction:column}.step-block{padding:16px}.sub-section .checklist{padding:6px 16px 12px}.checklist li{font-size:14px}.utility-row{margin-bottom:20px}.main{min-height:0}.page-title{font-size:28px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+@media print{html,body,.kb,.main{height:auto;overflow:visible;display:block}.sidebar,.utility-row,.nav-footer{display:none}.main-inner{padding:0;max-width:none}.step-block,.sub-section{break-inside:avoid}}
+
 </style>
 </head>
 <body>
@@ -138,13 +163,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
           <div class="gym-name">Urban Muaythai</div>
           <div class="gym-sub">Clubworx Analysis</div>
         </div>
+        <button class="mobile-menu" onclick="toggleMenu()" aria-expanded="false" aria-controls="analysis-navigation">Browse</button>
       </div>
       <div class="search-wrap">
         <i class="ti ti-search"></i>
-        <input type="text" id="search-input" placeholder="Search the analysis..." oninput="filterNav(this.value)">
+        <input type="text" aria-label="Search Clubworx procedures" id="search-input" placeholder="Search the analysis..." oninput="filterNav(this.value)">
       </div>
     </div>
-    <div class="nav-scroll">
+    <div class="nav-scroll" id="analysis-navigation" aria-label="Analysis procedures"><div id="search-feedback" class="search-feedback" aria-live="polite"></div>
       <div class="nav-home active" id="nav-home" onclick="showHome()">
         <i class="ti ti-home" style="font-size:15px"></i> Home
       </div>
@@ -152,7 +178,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,san
     </div>
   </div>
   <div class="main">
-    <div class="main-inner" id="main-content"></div>
+    <div class="main-inner"><div class="utility-row"><button onclick="showHome()">Overview</button><button onclick="showStep('new-members','access-activity')">Start activity review</button><button onclick="showStep('accountability','completion-log')">Daily completion log</button><a href="https://app.clubworx.com/gyms/2519/dashboard" target="_blank" rel="noopener noreferrer">Open Clubworx ↗</a></div><div id="main-content" aria-live="polite"></div></div>
   </div>
 </div>
 <script>
@@ -821,8 +847,9 @@ function buildNav(){
 function toggleCat(id){document.getElementById('cat-block-'+id).classList.toggle('open')}
 
 function filterNav(q){
-  const lower=q.toLowerCase();
-  if(!q){
+  const lower=q.trim().toLowerCase();let matchCount=0;
+  if(!lower){
+    document.getElementById('search-feedback').textContent='';
     document.querySelectorAll('.nav-item').forEach(el=>el.style.display='');
     document.querySelectorAll('.cat-block').forEach(el=>el.style.display='');
     return;
@@ -832,13 +859,14 @@ function filterNav(q){
     cat.steps.forEach(step=>{
       const el=document.getElementById('nav-'+step.id);
       if(!el)return;
-      const m=(step.title+' '+cat.label+' '+(step.short||'')).toLowerCase().includes(lower);
+      const m=(cat.label+' '+JSON.stringify(step)).toLowerCase().includes(lower);if(m)matchCount++;
       el.style.display=m?'':'none';
       if(m)any=true;
     });
     const b=document.getElementById('cat-block-'+cat.id);
-    if(b)b.style.display=any?'':'none';
+    if(b){b.style.display=any?'':'none';if(any)b.classList.add('open');}
   });
+  document.getElementById('search-feedback').textContent=matchCount?matchCount+' matching procedures':'No matching procedures. Try another word.';
 }
 
 function setActive(id){
@@ -852,7 +880,7 @@ function scrollTop(){document.querySelector('.main').scrollTo(0,0);}
 const totalAll=cats.reduce((a,c)=>a+c.steps.length,0);
 
 function showHome(){
-  setActive('home');scrollTop();
+  setActive('home');scrollTop();navigateTo('');
   document.getElementById('main-content').innerHTML=`
     <div class="page-tag" style="color:var(--red)">Clubworx Analysis</div>
     <div class="page-title">Daily Clubworx Analysis</div>
@@ -897,7 +925,7 @@ function showHome(){
 
 function showCat(catId){
   const cat=cats.find(c=>c.id===catId);if(!cat)return;
-  setActive('home');scrollTop();
+  setActive('home');scrollTop();navigateTo(catId);
   document.getElementById('main-content').innerHTML=`
     <div class="page-tag" style="color:${cat.color}">Category</div>
     <div class="cat-page-header" style="background:${cat.bg};border-color:${cat.bg}">
@@ -923,7 +951,7 @@ function showCat(catId){
 function showStep(catId,stepId){
   const cat=cats.find(c=>c.id===catId);if(!cat)return;
   const step=cat.steps.find(s=>s.id===stepId);if(!step)return;
-  setActive(stepId);scrollTop();
+  setActive(stepId);scrollTop();navigateTo(catId+'/'+stepId);
 
   let html=`
     <div class="page-tag" style="color:${cat.color}">${cat.label}</div>
@@ -1000,8 +1028,15 @@ function showStep(catId,stepId){
   document.getElementById('main-content').innerHTML=html;
 }
 
+
+function toggleMenu(){const open=document.querySelector('.sidebar').classList.toggle('menu-open');document.querySelector('.mobile-menu').setAttribute('aria-expanded',String(open));}
+function navigateTo(path){history.replaceState(null,'',location.pathname+location.search+(path?'#'+path:''));document.querySelector('.sidebar').classList.remove('menu-open');document.querySelector('.mobile-menu').setAttribute('aria-expanded','false');requestAnimationFrame(enhanceControls);}
+function enhanceControls(){document.querySelectorAll('[onclick]:not(button):not(a):not(input)').forEach(el=>{el.setAttribute('role','button');el.tabIndex=0;el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}};});}
+function restoreRoute(){const [category,step]=location.hash.slice(1).split('/');if(cats.some(c=>c.id===category&&(!step||c.steps.some(s=>s.id===step)))){step?showStep(category,step):showCat(category);}else showHome();}
 buildNav();
-showHome();
+restoreRoute();
+window.addEventListener('hashchange',restoreRoute);
+
 </script>
 </body>
 </html>
