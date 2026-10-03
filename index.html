@@ -151,6 +151,10 @@ body{color-scheme:light;font-size:15px}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 @media print{html,body,.kb,.main{height:auto;overflow:visible;display:block}.sidebar,.utility-row,.nav-footer{display:none}.main-inner{padding:0;max-width:none}.step-block,.sub-section{break-inside:avoid}}
 
+
+/* Keep the page top bar visible inside the page and Google Sites embeds. */
+.utility-row{position:sticky;top:0;z-index:60;isolation:isolate;box-shadow:0 5px 18px #0002}html{scroll-padding-top:var(--sticky-height,100px)}[id]{scroll-margin-top:12px}.utility-row{padding:12px 0;background:#f5f7fb}.main{scroll-padding-top:var(--sticky-height,100px)}
+@media print{.utility-row{position:static;box-shadow:none}}
 </style>
 </head>
 <body>
@@ -1038,5 +1042,5 @@ restoreRoute();
 window.addEventListener('hashchange',restoreRoute);
 
 </script>
-</body>
+<script>(()=>{const bar=document.querySelector(".utility-row");if(!bar)return;const update=()=>document.documentElement.style.setProperty('--sticky-height',(Math.ceil(bar.getBoundingClientRect().height)+16)+'px');new ResizeObserver(update).observe(bar);update();})();</script></body>
 </html>
