@@ -211,8 +211,13 @@ const cats = [
           'Confirm notes explain the action taken',
           'Confirm the membership aligns with what was sold',
           'Do not rely only on what another staff member entered — independently verify the complete setup',
-          'If any error found: correct immediately',
-          'If debit day is wrong: remove and reapply with the correct schedule'
+          'Weekly Kickstarter: the deposit covers week 1, then the first weekly debit falls about 7–9 days after the start date, on the same weekday each week',
+          'Upfront Kickstarter: the first recurring debit is at least one month after the start date',
+          'Kickstarter Upfront sold from 5 Oct 2026 must be $240 (less only when a paid casual is credited)',
+          'No Roll Over / FIFO members must be set up as No Roll Over from the start so they are not rolled into a recurring membership',
+          'Unusual sales with no explanation (e.g. a 15–18 Kickstarter sold to a 14-year-old): ask the staff member and record the answer',
+          'If any error found: log it in the Clubworx Analysis – Staff Error Log first. Fix it only once approved, except minor setup items (see Errors and corrections)',
+          'If debit day is wrong: once approved, remove and reapply with the correct schedule'
         ],
         alert:'A never-ending membership without a recurring payment schedule can allow a member to continue training without future payments being collected.',
         errors:[
@@ -228,12 +233,27 @@ const cats = [
         why:'Every cancellation must be processed against the correct membership status and leave a complete, dated record. This protects billing accuracy, prevents confusing automated messages, and makes the final payment and end date clear to both the member and the team.',
         sections:[
           {
+            title:'Cancellation policy',
+            icon:'ti-file-text',
+            items:[
+              'Adults out of agreement: 1 week notice',
+              'Adults inside the 6-month agreement: the member pays half of the remaining contract amount',
+              'Short Term Membership (3-month agreement): half of the remaining agreement amount',
+              'Kickstarter and other trials: the full 28 days must be completed — no early exit',
+              '15–18 memberships: no 6-month agreement; apply the current 15–18 notice period',
+              'Exceptions (moving away, injury, medical): allowed only when Mel or Richie has approved, and the approval must be recorded in the note',
+              'Staff must leave a note with the request (email/SMS copied in) and any necessary documents'
+            ],
+            alert:'An in-agreement cancellation with only 1 week notice, no half-of-remaining charge and no recorded Mel/Richie approval is an error to log and escalate to Mel the same day.'
+          },
+          {
             title:'Review every cancellation',
             icon:'ti-clipboard-check',
             items:[
               'In Recent Activity, filter to Cancellations for the review date',
               'Confirm the cancellation reason and request date are recorded in Clubworx notes',
-              'Confirm the standard notice period has been applied correctly',
+              'Check the membership start date: is the member still inside the agreement (6 months, Short Term 3 months, Kickstarter 28 days)?',
+              'Confirm the correct notice period or half-of-remaining charge has been applied, or that an approved exception is recorded',
               'Confirm the last payment date and membership end date are correct',
               'Confirm the cancellation is entered in the Daily Numbers Spreadsheet',
               'If the member is a current Kickstarter: flag immediately and update the New Member Spreadsheet',
@@ -351,6 +371,19 @@ const cats = [
             alert:'Extended dates are an approved exception, not a change to the standard six-week maximum.'
           },
           {
+            title:'Auditing suspensions',
+            icon:'ti-search',
+            items:[
+              'Compare the signed Suspension Form (start date, duration, reason) with the suspension entered in Clubworx',
+              'Invoices approved before the suspension was added are NOT removed by the suspension — always check the Payments tab',
+              'Forms signed by a parent sit on the parent profile — find the child',
+              'A missing note is not an error when the reason is already clear from an existing note or message (SMS, email)',
+              'Kids and teens holiday suspensions with a clear reason do not need a separate note',
+              'A finished suspension cannot be edited: correct it by skipping the affected payment and adding a note',
+              'Editing any suspension field re-sends the member confirmation email — for finished suspensions, correct with a note instead'
+            ]
+          },
+          {
             title:'Kickstarter members',
             icon:'ti-user-star',
             items:[
@@ -371,13 +404,19 @@ const cats = [
           'Check for pending bank update forms',
           'If bank form pending: follow up via SMS',
           'If multiple failed payments: create a task for a phone call',
-          'Consider escalation — payment plan or assistance — for complex situations'
+          'Consider escalation — payment plan or assistance — for complex situations',
+          'Desk (POS/cash) payments: confirm the matching invoice was marked paid or skipped, so it does not also go to debit (double-charge risk)',
+          'Look for duplicate invoices: same member, same membership, same amount within a few days',
+          'Every part payment, rescheduled payment, adjusted amount or skipped invoice needs a note explaining why',
+          'Casuals and memberships added at $0 need a note explaining why no payment was taken',
+          'Check whether a failed debit also triggered a failed-payment fee'
         ],
+        alert:'Payment issues are major. Double charges and failed-payment fees make members like the gym less, and then they do not roll over.',
         tip:'Failed payment fees accumulate. The longer you wait, the harder the conversation — and the more likely the member cancels out of embarrassment.'
       },
       {
         id:'errors',num:8,title:'Errors and corrections',isNew:false,
-        short:'Fix errors immediately and document all changes',
+        short:'Log every error first, then fix once approved',
         why:'Errors left uncorrected compound. One wrong debit date today causes a failed payment, a frustrated member, and a cancellation tomorrow.',
         errors:[
           {type:'Incorrect debit date',impact:'Member charged on wrong day — failed payment risk',severity:'critical'},
@@ -388,19 +427,24 @@ const cats = [
           {type:'Request screened but not actioned',impact:'Avoidable billing or service failure',severity:'critical'},
           {type:'Missing recurring direct debit',impact:'Future payments are not collected',severity:'critical'},
           {type:'Incorrect membership start date',impact:'Incorrect program and rollover timeline',severity:'critical'},
-          {type:'Non-starter shown in an active week',impact:'Incorrect outreach and progress tracking',severity:'moderate'}
+          {type:'Non-starter shown in an active week',impact:'Incorrect outreach and progress tracking',severity:'moderate'},
+          {type:'In-agreement cancellation without approval or exit charge',impact:'Lost contract revenue',severity:'critical'},
+          {type:'Payment taken at desk but invoice not marked paid',impact:'Member double-charged',severity:'critical'},
+          {type:'Payment change or $0 sale with no note',impact:'No record of why money was or was not taken',severity:'moderate'}
         ],
         items:[
-          'Fix all errors immediately where possible',
+          'Enter every issue found into the Clubworx Analysis – Staff Error Log on the day it is identified, before changing anything',
+          'Minor setup items can be fixed straight away: profile photo flag, member number, missing note',
+          'Payment, pricing, refund and cancellation fixes wait for approval from Mel or Ram',
           'Add notes explaining every correction made',
-          'Enter every issue found into the Clubworx Analysis Error Report on the day it is identified',
           'Log small errors as well as critical errors',
           'Record the date, member, issue, likely cause, correction, staff involved, and whether escalation or training is required',
           'Do not treat correcting the issue in Clubworx as a substitute for logging it',
+          'Record the staff member responsible using the profile activity log (e.g. "added by", "approved by")',
           'Escalate to Mel if the issue cannot be resolved at admin level',
           'Review recurring error types to identify process and training gaps'
         ],
-        alert:'The daily analysis is not complete until every identified error has been entered into the Clubworx Analysis Error Report.'
+        alert:'The daily analysis is not complete until every identified error has been entered into the Clubworx Analysis – Staff Error Log.'
       }
     ]
   },
@@ -417,8 +461,11 @@ const cats = [
         short:'Review every casual and confirm follow-up',
         why:'Casuals are warm leads. Without a follow-up note or task, they fall through the cracks and a potential membership is lost.',
         items:[
-          'Confirm waiver is signed for each casual visit',
-          'Confirm payment has been completed for the session',
+          'Confirm a waiver with a Waiver & Release section was signed on or before the day of the class',
+          'Forms that count: New Student Waiver, NSW-Referral, Kickstarter Program Accelerate, 15–18 Kickstarter, Kids & Teens 1 Week Trial (an old NSW from years ago still counts)',
+          'The adult Trial Session Sports Waiver has no release section and does not count on its own',
+          'A waiver signed the same day as the class (even minutes after the start) is acceptable; no waiver at all, or one signed on a later day, is an error',
+          'Confirm payment has been completed for the session ($40 Casual Session) — if it was free, a note must say why',
           'Check notes confirm the outcome: joined / not interested',
           'If no follow-up note exists: create a task for the sales team immediately'
         ],
@@ -430,7 +477,7 @@ const cats = [
         why:'Inbox coverage includes both screening and completing the required action. Clubworx and GetFit@ must show the same complete member timeline so billing and membership requests are not missed.',
         items:[
           'Review the Clubworx and GetFit@ inboxes for member messages and automated alerts',
-          'When Jacob is away, the assigned coverage person must both screen and action incoming messages',
+          'When Jakob is away, the assigned coverage person must both screen and action incoming messages',
           'Specifically check for cancellation, suspension, payment, injury, and membership-change requests',
           'Do not leave a request unactioned after reading or screening it',
           'Confirm the requested change was completed, the member was replied to, and the communication was logged',
@@ -483,6 +530,7 @@ const cats = [
         items:[
           'Confirm every new member has a completed waiver on file',
           'Confirm no one is training without a signed waiver (non-negotiable)',
+          'Kickstarter: the Kickstarter agreement must be signed before the Kickstarter membership is added',
           'If waiver missing: add "Waiver needed" note and follow up immediately',
           'Confirm preferred debit date in waiver is recorded',
           'Confirm debit date in waiver matches what is set in Clubworx'
@@ -496,8 +544,9 @@ const cats = [
         items:[
           'Confirm member number has been added to their profile',
           'Confirm profile photo has been taken',
-          'If photo missing: add flag in Clubworx — "Photo needed"',
-          'If member number missing: add it from the profile ID'
+          'If photo missing: add the flag "Profile Photo Needed ✅" (Show in Kiosk ticked)',
+          'Adults: Member Number = their Clubworx contact ID (the number at the end of the profile URL)',
+          'Kids and teens: keep their existing short member number — do not change it'
         ],
         tip:'Photos matter for culture. A faceless profile means coaches can\'t recognise members by name — which kills the personal connection.'
       },
@@ -577,6 +626,8 @@ const cats = [
           'Look for leads without a follow-up assigned',
           'Look for requests that haven\'t been actioned',
           'Look for red flags requiring escalation to Mel',
+          'A note that needs follow-up must also have a flag (so all staff see it) and a task (so one person chases it) — a note alone is not enough',
+          'If a note is something all staff should know, post it in Slack as well',
           'If unclear: investigate the member profile and confirm action was taken'
         ],
         tip:'A note written and never actioned is worse than no note — it means the team saw the problem and ignored it.'
@@ -632,7 +683,7 @@ const cats = [
           'Cancellation confirmations include the notice period, final payment date, and end date',
           'Email replies are recorded in Clubworx notes on the correct date',
           'All waivers have been checked',
-          'All errors have been corrected and entered in the Clubworx Analysis Error Report',
+          'All errors have been entered in the Clubworx Analysis – Staff Error Log (and corrected where approved)',
           'Clubworx and GetFit@ inbox items have been actioned or assigned',
           'New-member first sessions and non-starters have been checked',
           'Red and Orange Flag triggers have been assessed',
@@ -682,7 +733,7 @@ const cats = [
         short:'Know when to fix it yourself vs escalate to Mel',
         why:'Not every error can or should be fixed at admin level. Knowing the escalation threshold protects both the member experience and the business.',
         items:[
-          'Fix minor errors immediately and document with notes',
+          'Log every error first; fix minor setup items straight away and document with notes',
           'Escalate to Mel: membership applied incorrectly, payment dispute, member complaint, anything affecting billing over $50',
           'Add notes on every correction — even small ones',
           'Track error patterns weekly to identify team training gaps'
@@ -702,7 +753,8 @@ const cats = [
         escalations:[
           {trigger:'Waiver missing for member who has already attended class',when:'Same day',how:'Slack or direct message to Mel'},
           {trigger:'Payment dispute or billing error over $50',when:'Same day',how:'Slack + note in Clubworx'},
-          {trigger:'Incorrect membership causing ongoing incorrect billing',when:'Same day',how:'Slack + correct in Clubworx immediately'},
+          {trigger:'Incorrect membership causing ongoing incorrect billing',when:'Same day',how:'Slack + correct in Clubworx once approved'},
+          {trigger:'In-agreement cancellation without recorded Mel/Richie approval',when:'Same day',how:'Slack with member name, agreement end date and amount at stake'},
           {trigger:'Member complaint raised in notes by staff',when:'Same day',how:'Slack with member name and summary'},
           {trigger:'KS member cancellation during trial period',when:'Same day',how:'Slack — impacts rollover rate'},
           {trigger:'Refund or credit requested after an already-processed payment',when:'Same day',how:'Escalate with the complete dated timeline'},
@@ -771,30 +823,6 @@ const cats = [
     ]
   },
   {
-    id:'open-actions',
-    label:'Open Actions',
-    icon:'ti-list-check',
-    color:'#B54708',
-    bg:'#ffead5',
-    desc:'Temporary member-specific and system follow-ups. Remove each action once it is completed and verified.',
-    steps:[
-      {
-        id:'special-cases',num:'!',title:'Special cases & open actions',isNew:false,
-        short:'Current named follow-ups that sit outside the permanent SOP',
-        why:'These are temporary operational actions, not standing policy. Keep them visible until completion, then remove them from this section.',
-        items:[
-          '<strong>Catalina:</strong> confirm the recurring debit schedule, correct the membership start date, align it with first attendance, and update the New Member Spreadsheet',
-          '<strong>Dean and Zachary Warden:</strong> move them to Waiting / Not Started if they still have zero attendance and send first-session booking outreach',
-          '<strong>Vincent Gonzalez:</strong> apply the future suspension dates, add the complete dated email timeline to Clubworx, and await Richie\'s refund-or-credit decision before replying',
-          '<strong>Surgery/Thailand tour member:</strong> confirm the approved extended-suspension end date and remove or amend it early if the member returns sooner',
-          '<strong>Kids Academy grading:</strong> update each child through Stars and Rings → Add New Style → Kids Academy → Rank → Grading Date → Save',
-          '<strong>Email templates:</strong> replace inaccessible YouTube links, test the discovery-call CTA, and continue tracking the HTML embedding request with Clubworx support'
-        ],
-        alert:'Open Actions is a temporary working list. Remove an item only after the change, member reply, notes, and any required approval have been verified.'
-      }
-    ]
-  },
-  {
     id:'accountability',
     label:'Accountability',
     icon:'ti-clipboard-check',
@@ -809,7 +837,8 @@ const cats = [
         items:[
           'When the review is complete, add a Clubworx note (or entry in the designated log) with: date reviewed, reviewed by, time completed, any errors corrected, any escalations made',
           'If using a Google Sheet log: enter one row per day with the above fields',
-          'Confirm the Clubworx Analysis Error Report was completed for the review date',
+          'Confirm the Clubworx Analysis – Staff Error Log was completed for the review date',
+          'Send Mel an end-of-day email with the errors found that day and any notes that need following up',
           'If no errors were found, record “No errors identified” rather than leaving the day blank',
           'Confirm inbox coverage was completed and all cancellation and suspension requests were actioned or assigned',
           'Record any refund or credit decisions still awaiting management approval',
