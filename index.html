@@ -241,10 +241,12 @@ const cats = [
               'Short Term Membership (3-month agreement): half of the remaining agreement amount',
               'Kickstarter and other trials: the full 28 days must be completed — no early exit',
               '15–18 memberships: no 6-month agreement; apply the current 15–18 notice period',
-              'Exceptions (moving away, injury, medical): allowed only when Mel or Richie has approved, and the approval must be recorded in the note',
-              'Staff must leave a note with the request (email/SMS copied in) and any necessary documents'
+              'Moving away during the 6-month agreement: waive the remaining agreement charge and apply 7 days notice when the member provides confirmation of the move on the new employer’s letterhead with a signature. Separate Mel or Richie approval is not required when these conditions are met',
+              'A relocation email alone is not sufficient unless it includes confirmation on the new employer’s letterhead with a signature',
+              'Other exceptions (including injury, medical, or moving away without the required employer proof): Mel or Richie must approve, and the approval must be recorded in the note',
+              'Staff must leave a note with the request (email/SMS copied in) and any necessary documents. For the employer-confirmed relocation exception, attach the signed employer-letterhead confirmation and record the reason, request date, 7-day notice period and waived remaining agreement charge'
             ],
-            alert:'An in-agreement cancellation with only 1 week notice, no half-of-remaining charge and no recorded Mel/Richie approval is an error to log and escalate to Mel the same day.'
+            alert:'An in-agreement cancellation with no half-of-remaining charge must have a documented valid exception: signed confirmation of relocation on the new employer’s letterhead with 7 days notice (6-month agreement), or recorded Mel/Richie approval. Otherwise, log the error and escalate to Mel the same day.'
           },
           {
             title:'Review every cancellation',
@@ -253,7 +255,7 @@ const cats = [
               'In Recent Activity, filter to Cancellations for the review date',
               'Confirm the cancellation reason and request date are recorded in Clubworx notes',
               'Check the membership start date: is the member still inside the agreement (6 months, Short Term 3 months, Kickstarter 28 days)?',
-              'Confirm the correct notice period or half-of-remaining charge has been applied, or that an approved exception is recorded',
+              'Confirm the correct notice period or half-of-remaining charge has been applied, or that a valid exception is recorded. For employer-confirmed relocation during the 6-month agreement, check the signed employer-letterhead proof, 7 days notice and waived remaining agreement charge; for other exceptions, check recorded Mel/Richie approval',
               'Confirm the last payment date and membership end date are correct',
               'Confirm the cancellation is entered in the Daily Numbers Spreadsheet',
               'If the member is a current Kickstarter: flag immediately and update the New Member Spreadsheet',
@@ -754,7 +756,7 @@ const cats = [
           {trigger:'Waiver missing for member who has already attended class',when:'Same day',how:'Slack or direct message to Mel'},
           {trigger:'Payment dispute or billing error over $50',when:'Same day',how:'Slack + note in Clubworx'},
           {trigger:'Incorrect membership causing ongoing incorrect billing',when:'Same day',how:'Slack + correct in Clubworx once approved'},
-          {trigger:'In-agreement cancellation without recorded Mel/Richie approval',when:'Same day',how:'Slack with member name, agreement end date and amount at stake'},
+          {trigger:'In-agreement cancellation without the required charge or a documented valid exception',when:'Same day',how:'Slack with member name, agreement end date and amount at stake'},
           {trigger:'Member complaint raised in notes by staff',when:'Same day',how:'Slack with member name and summary'},
           {trigger:'KS member cancellation during trial period',when:'Same day',how:'Slack — impacts rollover rate'},
           {trigger:'Refund or credit requested after an already-processed payment',when:'Same day',how:'Escalate with the complete dated timeline'},
