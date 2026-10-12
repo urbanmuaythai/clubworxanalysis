@@ -211,7 +211,11 @@ const cats = [
           'Confirm notes explain the action taken',
           'Confirm the membership aligns with what was sold',
           'Do not rely only on what another staff member entered — independently verify the complete setup',
-          'Weekly Kickstarter: the deposit covers week 1, then the first weekly debit falls about 7–9 days after the start date, on the same weekday each week',
+          'Weekly Kickstarter standard setup: the deposit covers week 1, then the first weekly debit falls about 7–9 days after the start date, on the same weekday each week',
+          'Weekly Kickstarter first-payment exception (confirmed by Mel): occasionally, a member may start with no payment at signup and have the first payment debited a day or so later, provided a clear note records the reason and the agreed arrangement',
+          'The note must explain why the first payment is delayed and record the actual start date, agreed first-payment date and amount, and who agreed to the arrangement. Example: Member does not get paid until Tuesday; I agreed they could start today with the first payment on Wednesday',
+          'A note such as Set direct debit to Wednesday records the debit day but does not explain the delayed first payment. Ask the staff member for the reason and record it',
+          'Check that the first debit and ongoing weekly schedule match the documented arrangement. A documented delayed first payment is not automatically a debit-date error; keep the membership start date aligned with actual first attendance',
           'Upfront Kickstarter: the first recurring debit is at least one month after the start date',
           'Kickstarter Upfront sold from 5 Oct 2026 must be $240 (less only when a paid casual is credited)',
           'No Roll Over / FIFO members must be set up as No Roll Over from the start so they are not rolled into a recurring membership',
@@ -222,7 +226,7 @@ const cats = [
         alert:'A never-ending membership without a recurring payment schedule can allow a member to continue training without future payments being collected.',
         errors:[
           {type:'Missing recurring payment schedule',impact:'Future payments are not collected',severity:'critical'},
-          {type:'Incorrect recurring debit start',impact:'Member is charged early, late, or not at all',severity:'critical'},
+          {type:'Recurring debit start does not match the agreed, documented arrangement',impact:'Member is charged early, late, or not at all',severity:'critical'},
           {type:'Membership start date does not match first attendance',impact:'Incorrect program timeline and rollover date',severity:'critical'}
         ],
         tip:'When in doubt about what was sold, check the member conversation or ask the salesperson before correcting.'
@@ -411,6 +415,7 @@ const cats = [
           'Look for duplicate invoices: same member, same membership, same amount within a few days',
           'Every part payment, rescheduled payment, adjusted amount or skipped invoice needs a note explaining why',
           'Casuals and memberships added at $0 need a note explaining why no payment was taken',
+          'Weekly Kickstarter with no payment at signup: check for a clear note explaining the delayed first payment, who agreed to it, and the agreed first-payment date and amount. Confirm the debit is scheduled accordingly; ask the staff member and record the explanation if it is missing',
           'Check whether a failed debit also triggered a failed-payment fee'
         ],
         alert:'Payment issues are major. Double charges and failed-payment fees make members like the gym less, and then they do not roll over.',
