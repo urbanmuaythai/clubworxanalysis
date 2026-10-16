@@ -847,8 +847,8 @@ const cats = [
         short:'Record who completed the review, when, and what was escalated',
         why:'A dated completion record shows that the Clubworx Analysis was completed, who completed it, and what was corrected or escalated.',
         items:[
-          'When the review is complete, add a Clubworx note (or entry in the designated log) with: date reviewed, reviewed by, time completed, any errors corrected, any escalations made',
-          'If using a Google Sheet log: enter one row per day with the above fields',
+          'When the review is complete, open the Daily Completion Log tab in the Clubworx Error spreadsheet below',
+          'Enter one row per day with: date reviewed, reviewed by, time completed, any errors corrected, and any escalations made',
           'Confirm the Clubworx Analysis – Staff Error Log was completed for the review date',
           'Send Mel an end-of-day email with the errors found that day and any notes that need following up',
           'If no errors were found, record “No errors identified” rather than leaving the day blank',
@@ -857,7 +857,10 @@ const cats = [
           'If anything was escalated to Mel: record it in the log with the escalation method and outcome',
           'Mel or Ram can check the log at any time to confirm the review was completed'
         ],
-        tip:'A blank day is ambiguous. Record “No errors identified” when appropriate so the log proves the analysis and error check were completed.'
+        tip:'A blank day is ambiguous. Record “No errors identified” when appropriate so the log proves the analysis and error check were completed.',
+        sheetTitle:'Daily Completion Log',
+        sheetUrl:'https://docs.google.com/spreadsheets/d/1QOZUeq1PWoViFP3r-OYutyQ3WJnxs0oQqZHcpVME7aQ/edit?gid=1118092586#gid=1118092586',
+        sheetEmbedUrl:'https://docs.google.com/spreadsheets/d/1QOZUeq1PWoViFP3r-OYutyQ3WJnxs0oQqZHcpVME7aQ/edit?embedded=true&rm=minimal&gid=1118092586#gid=1118092586'
       },
       {
         id:'clubworx-error',num:'E',title:'Clubworx Error spreadsheet',isNew:false,
@@ -1011,11 +1014,7 @@ function showStep(catId,stepId){
     <div class="page-desc">${step.why}</div>
     <div class="divider"></div>`;
 
-  if(step.sheetEmbedUrl){
-    html+=`<div class="sheet-actions"><a href="${step.sheetUrl}" target="_blank" rel="noopener noreferrer">Open spreadsheet ↗</a></div>
-      <p class="sheet-access" id="sheet-access">Use your authorised Google account. If the sheet does not load here, open it in a new tab to sign in or request access.</p>
-      <iframe class="sheet-frame" src="${step.sheetEmbedUrl}" title="Clubworx Error spreadsheet" aria-describedby="sheet-access" allowfullscreen></iframe>`;
-  } else if(step.escalations){
+  if(step.escalations){
     html+=`<div class="section-title" style="margin-top:0">Escalation trigger reference</div>
     <div class="step-block" style="padding:0;overflow:hidden">
       <table class="escalate-table">
@@ -1049,7 +1048,7 @@ function showStep(catId,stepId){
         ${sec.alert?`<div class="alert"><div class="alert-head"><i class="ti ti-bolt"></i>Important</div><p>${sec.alert}</p></div>`:''}
         ${sec.tip?`<div class="tip-box"><i class="ti ti-bulb"></i><p>${sec.tip}</p></div>`:''}
       </div>`).join('');
-  } else {
+  } else if(step.items){
     html+=`<div class="section-title" style="margin-top:0">What to do</div>`;
     html+=`<div class="step-block">
       <ul class="checklist">
@@ -1071,6 +1070,13 @@ function showStep(catId,stepId){
 
   if(step.tip){
     html+=`<div class="tip-box"><i class="ti ti-bulb"></i><p>${step.tip}</p></div>`;
+  }
+
+  if(step.sheetEmbedUrl){
+    html+=`<div class="section-title">${step.sheetTitle||'Clubworx Error spreadsheet'}</div>
+      <div class="sheet-actions"><a href="${step.sheetUrl}" target="_blank" rel="noopener noreferrer">Open ${step.sheetTitle||'spreadsheet'} ↗</a></div>
+      <p class="sheet-access" id="sheet-access">Use your authorised Google account. If the sheet does not load here, open it in a new tab to sign in or request access.</p>
+      <iframe class="sheet-frame" src="${step.sheetEmbedUrl}" title="${step.sheetTitle||'Clubworx Error spreadsheet'}" aria-describedby="sheet-access" allowfullscreen></iframe>`;
   }
 
   const si=cat.steps.findIndex(s=>s.id===stepId);
