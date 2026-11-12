@@ -619,6 +619,226 @@ const cats = [
     ]
   },
   {
+    id:'waivers',
+    label:'Waivers & Forms',
+    icon:'ti-file-text',
+    color:'#5B3A9E',
+    bg:'#e9e1f7',
+    desc:'Which Clubworx form to send for each situation, and exactly what to do when a signed form comes back.',
+    steps:[
+      {
+        id:'which-waiver',num:'W1',title:'Which form to send',isNew:true,
+        short:'Pick the right form for the situation before you send anything',
+        why:"Every form does a different job. The wrong form can leave a member training without a waiver and release, set up the wrong payments, or miss the terms we rely on later. Check this list before sending.",
+        sections:[
+          {
+            title:'Trying a class',
+            icon:'ti-run',
+            items:[
+              "<b>Adult casual or first class:</b> New Student Waiver (includes the waiver and release)",
+              "<b>Adult referred by a member:</b> New Student Waiver - Referral",
+              "<b>Kid or teen 1 week trial:</b> Kids &amp; Teens 1 Week Trial Sports Waiver, sent to the parent",
+              "<b>Trial Session Sports Waiver:</b> old adult prospect form with NO waiver and release. Don't send it for kids or teens, and it doesn't cover anyone on its own"
+            ],
+            alert:"Nobody trains without a form that includes a waiver and release: New Student Waiver, NSW - Referral, Kickstarter Program Accelerate, 15-18 years Kickstarter Program, or Kids &amp; Teens 1 Week Trial."
+          },
+          {
+            title:'Joining',
+            icon:'ti-user-plus',
+            items:[
+              "<b>Adult Kickstarter:</b> Kickstarter Program Accelerate ($240 upfront, or 4 weekly payments of $65 = $260 minimum)",
+              "<b>15-18 Kickstarter:</b> 15-18 years Kickstarter Program (same price as the adult Kickstarter)",
+              "<b>15-18 membership after the Kickstarter:</b> 15-18 years membership (no 6-month agreement, 30 days notice to cancel)",
+              "<b>Kids 7-10 after their trial:</b> Kids Direct Debit (Kids 7-10, 2 x classes)",
+              "<b>Teens after their trial:</b> Teens Class Direct Debit (2x classes or unlimited)",
+              "<b>Adult joining without a Kickstarter</b> (e.g. returning member): 6 Month Agreement",
+              "<b>Short Term:</b> Short Term Membership waiver (3-month agreement)",
+              "<b>12-month memberships:</b> 12 Month Agreement, only when a 12-month membership was sold"
+            ],
+            tip:"A Kickstarter member rolling over does NOT need a separate 6 Month Agreement. The Kickstarter Accelerate T&amp;Cs already roll them into the 6-month membership."
+          },
+          {
+            title:'Changing, pausing or leaving',
+            icon:'ti-arrows-exchange',
+            items:[
+              "<b>Upgrade, downgrade, change debit day, child's membership:</b> T6 Membership Change Form",
+              "<b>New card or bank account, or a different payer:</b> Bank Account Update form",
+              "<b>Pause:</b> Suspension Form",
+              "<b>Cancel:</b> Cancellation Form"
+            ]
+          },
+          {
+            title:"Don't use",
+            icon:'ti-ban',
+            items:[
+              "Trial Session Sports Waiver for kids or teens (no waiver and release)",
+              "7-10 years kids Direct Debit (older form, use Kids Direct Debit)",
+              "Cancellation Form Prior to Term (draft, never used)",
+              "Event forms (Thailand Tour, Urban Warrior, Special Event/One Off, Morning Mens Program, Personal Trainer Payment) only for that event or service"
+            ]
+          }
+        ]
+      },
+      {
+        id:'send-waiver',num:'W2',title:'Sending a form',isNew:true,
+        short:'Send from the right profile, then record it',
+        why:"A form sent from the wrong profile lands on the wrong person and can create duplicates. A form that was sent but not followed up means someone trains or gets charged without the paperwork.",
+        items:[
+          "Open the member's profile > Waivers tab > Sign new Waiver > choose the form",
+          "Kids and teens: send from the PARENT's profile and include the child as a family member",
+          "Send Link to Member emails the link. To text it instead, use Copy Link and paste it into an SMS",
+          "Check the email address before sending (bounced emails are common). Links last 7 days",
+          "Add a note: which form, why, and when it was sent. If we need it back by a certain date (first class, next debit), add a flag and a task",
+          "Status 'prefilled' means the link was sent, NOT signed. Check for 'signed' before treating it as done"
+        ],
+        alert:"Forms that need to come back before a class or a debit (waivers, Kickstarter, bank details, suspensions) always get a task, so someone chases them."
+      },
+      {
+        id:'review-waiver',num:'W3',title:'When a form comes back',isNew:true,
+        short:'Every signed form waits in Pending Review',
+        why:"Approving a form is the moment the profile and payments get set up. Most mistakes happen here: duplicate profiles, double charges, and debits starting inside the Kickstarter.",
+        sections:[
+          {
+            title:'Before you approve',
+            icon:'ti-inbox',
+            items:[
+              "Waivers > Pending Review (orange number). Re-check the list right before acting, as another staff member may have just approved it",
+              "Existing member: associate the form with their existing contact. Don't approve it as a new contact unless you've checked it really is a new person",
+              "Shared email (parent/child, partners): check they are actually the same person before merging",
+              "Read the Membership summary on the review page. The default can re-charge an upfront that was already paid, or start debits inside the Kickstarter. Fix it with Change membership details before you approve",
+              "Family forms add the plan for every signee by default. Set 'No membership' for anyone not training (e.g. the parent)",
+              "If you change the price, Clubworx asks for customer consent. Only choose 'Consent already given' if the member has agreed in writing or in person"
+            ]
+          },
+          {
+            title:'After you approve',
+            icon:'ti-file-check',
+            items:[
+              "Approving does NOT create a suspension, a cancellation or a plan change. You still do those on the profile",
+              "Add a note with what was set up (plan, start date, first debit date and amount)",
+              "Finish or roll any related task, and dismiss any 'waiver needed' flag only once the form is signed",
+              "New members: member number, photo flag if no photo, and the New Member Spreadsheet"
+            ]
+          }
+        ]
+      },
+      {
+        id:'waiver-actions',num:'W4',title:'What to do with each form',isNew:true,
+        short:'The follow-up steps for each signed form',
+        why:"Each form needs different follow-up in Clubworx. Use this as the checklist once a signed form is approved.",
+        sections:[
+          {
+            title:'New Student Waiver / NSW - Referral',
+            icon:'ti-user-check',
+            items:[
+              "Casual: add the Casual Session and mark it paid (or record the free session reason in a note, e.g. a member's friend's first session)",
+              "Referral: note who referred them",
+              "If they join, set up the Kickstarter from the Kickstarter form, not from this waiver"
+            ]
+          },
+          {
+            title:'Kids & Teens 1 Week Trial',
+            icon:'ti-mood-kid',
+            items:[
+              "Add the Teens or Kids 1 Week Trial ($99) from their first class date and mark it paid when they pay",
+              "Book the first class and add a note",
+              "Before the trial ends: roll-over chat with the parent, then send Kids Direct Debit or Teens Class Direct Debit"
+            ]
+          },
+          {
+            title:'Kickstarter (adult and 15-18)',
+            icon:'ti-flame',
+            items:[
+              "The Kickstarter form must be signed before the Kickstarter membership is added. Deposit taken and link sent the same day, waiting on the signature, is fine",
+              "Upfront: $240 from 5 Oct 2026 (less only when a paid casual is credited). Weekly: 4 x $65",
+              "Recurring debits must not start inside the 28 days. Upfront: first debit at least 4 weeks after the start date",
+              "Start date = first class. Update the New Member Spreadsheet",
+              "No Roll Over / FIFO members: set up as No Roll Over from the start"
+            ]
+          },
+          {
+            title:'Direct debit forms (Kids, Teens, 15-18, 6 Month, Short Term)',
+            icon:'ti-repeat',
+            items:[
+              "Check the plan they picked matches their age and class (e.g. a 12-year-old belongs in Teens, not Kids 7-10)",
+              "Roll-over: change the membership the same day as the roll-over chat. End the trial or Kickstarter the day before, start the new plan that day, and keep their usual debit day",
+              "Check the first debit date doesn't overlap a period already paid",
+              "Update the Kickstarter Master / New Member Spreadsheet status"
+            ]
+          },
+          {
+            title:'Suspension Form',
+            icon:'ti-calendar-pause',
+            items:[
+              "Rules: minimum 2 weeks, maximum 6 weeks, maximum 2 suspensions in any 12 months. 48 hours notice, never backdated",
+              "Kids and teens: 2 suspensions plus school holidays per year",
+              "Count the suspensions in the last 12 months before approving",
+              "Add the suspension on the profile (Suspensions > Add new suspension), then choose 'Delete the affected payments (no catch-up payment)'",
+              "Check the Payments tab: debits stop for the right weeks and restart after",
+              "Saving fires the 'Suspension Added' email to the member, so confirm the dates before saving",
+              "Medical holds: ask for the medical certificate. Once it arrives we process the hold ourselves"
+            ],
+            alert:"Over the limits only as an approved exception (owner decision, organised gym tour, or medical proof), and the reason goes in the note."
+          },
+          {
+            title:'Cancellation Form',
+            icon:'ti-door-exit',
+            items:[
+              "Notice runs from the day the form is signed",
+              "Adults out of agreement: 1 week. Inside the 6-month (or Short Term 3-month) agreement: half of the remaining fees, unless proof is provided",
+              "Proof (move of more than 20km, medical certificate, or termination certificate) = 7 days notice once sighted and saved in the Google Drive folder",
+              "15-18: 30 days. Kids and teens: 7 days or end of school term",
+              "Kickstarters and trials must finish their full period",
+              "Add any suspension time to the end date, apply the cancellation, then send the 'Cancellation of membership' email with the final payment and end date",
+              "Paste the member's request and our reply into the note"
+            ]
+          },
+          {
+            title:'T6 Membership Change Form',
+            icon:'ti-arrows-exchange',
+            items:[
+              "Approving it does NOT change the membership. Switch the plan or debit day yourself",
+              "The form shows no prices. Confirm the price with the member and in the note",
+              "Agreement ended: $65 Accelerate / $55 Fun &amp; Fitness flat (we cover the bank or card fee)",
+              "Still inside an older agreement: their legacy rate plus the fee",
+              "The original agreement dates stay the same. A change doesn't start a new 6-month term"
+            ]
+          },
+          {
+            title:'Bank Account Update form',
+            icon:'ti-credit-card',
+            items:[
+              "Once approved it updates the card or bank on the Ezidebit payer straight away. The Clubworx wallet can still show the old card",
+              "Until it is signed: note, red flag (kiosk off) and a task before the next debit",
+              "Card or bank change means the fee changes too (card 2%, bank $1.50) for members still on fee-added pricing"
+            ]
+          }
+        ]
+      },
+      {
+        id:'waiver-audit',num:'W5',title:'Waiver checks in the daily audit',isNew:true,
+        short:'How waiver problems are judged in the Clubworx Analysis',
+        why:"These rules decide what gets logged in the Staff Error Log, so every reviewer judges waivers the same way.",
+        items:[
+          "No waiver with a waiver and release before training: log it, and stop training until it is signed",
+          "Signed on the same day as the class (even minutes or an hour after the start): acceptable, don't log",
+          "Signed a day or more after the class: log it, then mark it Fixed once signed",
+          "An old New Student Waiver from years ago still counts as cover",
+          "Kickstarter membership added before the Kickstarter form is signed: log it, unless the deposit was taken and the link sent the same day",
+          "Flag dismissed before the form was signed: log it, and re-add the flag or a task",
+          "Form left in Pending Review with nothing recorded: check whether it was a free session or a mistake before logging"
+        ],
+        alert:"Status 'prefilled' is not signed. Always check the form status on the profile, not just that a link was sent.",
+        errors:[
+          {type:'Training with no waiver and release',impact:'Legal liability',severity:'critical'},
+          {type:'Kickstarter added before the Kickstarter form was signed',impact:'No signed payment terms',severity:'critical'},
+          {type:'Wrong form sent (e.g. adult form for a kid)',impact:'No release cover for the child',severity:'moderate'},
+          {type:'Approved without fixing the membership summary',impact:'Double charge or debits inside the Kickstarter',severity:'moderate'}
+        ]
+      }
+    ]
+  },
+  {
     id:'tasks-notes',
     label:'Tasks & Notes',
     icon:'ti-checkbox',
