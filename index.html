@@ -208,11 +208,11 @@ const cats = [
           'Filter activity to Memberships in Recent Activity',
           'Confirm the correct membership type has been selected',
           'Confirm the Clubworx membership start date matches the member\'s actual first attendance',
-          'If the member started later than planned, update both Clubworx and the New Member Spreadsheet',
+          "If the member started later than planned, update the start date in Clubworx. The NMS app picks up the first class from the hourly Clubworx sync, so check it did (update the NMS spreadsheet backup as needed)",
           'Confirm the payment schedule matches what the member agreed to',
           'Confirm every never-ending membership has a recurring payment schedule',
           'For Kickstarter upfront payments, confirm the weekly direct debit begins immediately after the upfront period',
-          'Compare the recurring payment start date against the waiver, membership agreement, and New Member Spreadsheet',
+          "Compare the recurring payment start date against the waiver, membership agreement, and NMS app",
           'Confirm notes explain the action taken',
           'Confirm the membership aligns with what was sold',
           'Do not rely only on what another staff member entered — independently verify the complete setup',
@@ -223,6 +223,8 @@ const cats = [
           'Check that the first debit and ongoing weekly schedule match the documented arrangement. A documented delayed first payment is not automatically a debit-date error; keep the membership start date aligned with actual first attendance',
           'Upfront Kickstarter: the first recurring debit is at least one month after the start date',
           'Kickstarter Upfront sold from 5 Oct 2026 must be $240 (less only when a paid casual is credited)',
+          "Agreement ended (6 months done, no new agreement): the price is $65 Accelerate / $55 Fun &amp; Fitness flat. We cover the card or bank fee",
+          "Members still inside an older agreement keep their legacy rate plus the fee (card 2%, bank $1.50) until the agreement ends",
           'No Roll Over / FIFO members must be set up as No Roll Over from the start so they are not rolled into a recurring membership',
           'Unusual sales with no explanation (e.g. a 15–18 Kickstarter sold to a 14-year-old): ask the staff member and record the answer',
           'If any error found: log it in the Clubworx Analysis – Staff Error Log first. Fix it only once approved, except minor setup items (see Errors and corrections)',
@@ -249,13 +251,14 @@ const cats = [
               'Adults inside the 6-month agreement: the member pays half of the remaining contract amount',
               'Short Term Membership (3-month agreement): half of the remaining agreement amount',
               'Kickstarter and other trials: the full 28 days must be completed — no early exit',
-              '15–18 memberships: no 6-month agreement; apply the current 15–18 notice period',
-              'Moving away during the 6-month agreement: waive the remaining agreement charge and apply 7 days notice when the member provides confirmation of the move on the new employer’s letterhead with a signature. Separate Mel or Richie approval is not required when these conditions are met',
-              'A relocation email alone is not sufficient unless it includes confirmation on the new employer’s letterhead with a signature',
-              'Other exceptions (including injury, medical, or moving away without the required employer proof): Mel or Richie must approve, and the approval must be recorded in the note',
-              'Staff must leave a note with the request (email/SMS copied in) and any necessary documents. For the employer-confirmed relocation exception, attach the signed employer-letterhead confirmation and record the reason, request date, 7-day notice period and waived remaining agreement charge'
+              "15–18 memberships: no 6-month agreement, 30 days notice",
+              "Kids and teens: 7 days notice or the end of the school term",
+              "Inside the agreement WITH proof (move of more than 20km, medical certificate, or termination certificate): 7 days notice once the proof is sighted and saved in the Google Drive folder. No separate approval needed. A move needs written confirmation, e.g. on the new employer's letterhead with a signature",
+              "Agreement already ended, or a plan change after the 6 months with no new agreement signed: out of agreement, 1 week notice. A plan change does not restart the 6 months",
+              "Any other exception (e.g. hardship): Mel or Richie decide, as the owners. Record their decision in the note",
+              "Staff must leave a note with the request (member's email or SMS copied in), our reply, and any documents"
             ],
-            alert:'An in-agreement cancellation with no half-of-remaining charge must have a documented valid exception: signed confirmation of relocation on the new employer’s letterhead with 7 days notice (6-month agreement), or recorded Mel/Richie approval. Otherwise, log the error and escalate to Mel the same day.'
+            alert:"An in-agreement cancellation with no half-of-remaining charge must have proof saved in the Google Drive folder or a recorded Mel/Richie decision. Otherwise, log the error and raise it with Mel or Richie the same day."
           },
           {
             title:'Review every cancellation',
@@ -264,10 +267,10 @@ const cats = [
               'In Recent Activity, filter to Cancellations for the review date',
               'Confirm the cancellation reason and request date are recorded in Clubworx notes',
               'Check the membership start date: is the member still inside the agreement (6 months, Short Term 3 months, Kickstarter 28 days)?',
-              'Confirm the correct notice period or half-of-remaining charge has been applied, or that a valid exception is recorded. For employer-confirmed relocation during the 6-month agreement, check the signed employer-letterhead proof, 7 days notice and waived remaining agreement charge; for other exceptions, check recorded Mel/Richie approval',
+              "Confirm the correct notice period or half-of-remaining charge has been applied, or that proof is saved in the Google Drive folder, or that a Mel/Richie decision is recorded",
               'Confirm the last payment date and membership end date are correct',
               'Confirm the cancellation is entered in the Daily Numbers Spreadsheet',
-              'If the member is a current Kickstarter: flag immediately and update the New Member Spreadsheet',
+              "If the member is a current Kickstarter: flag it and set their final status in the NMS app (Not Rolled Over or NO)",
               'Check whether the cancellation triggers a Red Flag and update the Red Flag Tracker if required'
             ]
           },
@@ -317,11 +320,13 @@ const cats = [
             title:'Eligibility',
             icon:'ti-clipboard-list',
             items:[
-              'Minimum 2 weeks · Maximum 6 weeks · Maximum twice per year',
-              'Kids, Cadets & Teens: no twice-per-year restriction',
-              'Signed Suspension Waiver must be on file before processing'
+              "Minimum 2 weeks · Maximum 6 weeks · Maximum 2 suspensions in any 12 months",
+              "Kids and teens: 2 suspensions plus school holidays per year",
+              "At least 48 hours notice, never backdated",
+              "Signed Suspension Form must be on file before processing",
+              "Medical holds: ask for a medical certificate. Once it arrives, we process the hold ourselves"
             ],
-            alert:'The six-week maximum remains the standard policy. Surgery, recovery, and organised gym-tour suspensions must be treated as approved exceptions unless the general policy is formally changed.'
+            alert:"Going over these limits is an exception for Mel or Richie to decide (e.g. surgery, recovery, an organised gym tour), recorded in the note. Extending a pause they already approved is fine with a signed form and a note."
           },
           {
             title:'Process the waiver',
@@ -352,6 +357,7 @@ const cats = [
               'Search for the member > open their profile > Suspensions (left column) > Add New Suspension',
               'Enter Start and End dates from the form, paste the reason, click Save',
               'Next screen: select "Delete the affected payments, no catch-up payment" — never select the catch-up option',
+              "Approving the Suspension Form does NOT create the suspension. You must add it on the profile",
               'Click Show Payments to verify affected dates, then Save',
               'Go to the Payments tab to confirm the suspension applied correctly'
             ]
@@ -361,10 +367,10 @@ const cats = [
             icon:'ti-clock',
             items:[
               'Suspension requests must be actioned as soon as they are received during inbox coverage',
-              'Submitted before 6am on debit day → suspension can start that day',
-              'Submitted after 6am on debit day → start date shifts to the next day',
+              "48 hours notice: a payment due within the next 48 hours still goes through. Start the suspension after it",
+              "Never backdate a suspension. Clubworx won't accept a start date before a payment that has already processed",
               'If a payment has already processed, do not promise a refund',
-              'Apply the correct future suspension dates and escalate any refund or account-credit request for approval',
+              "Apply the correct future suspension dates. Any refund or account-credit request is Mel or Richie's decision",
               'Kids aged 6–9 → suspended by admin at end of each school term, not member-initiated',
               'Automated confirmation email fires to member on save — confirm it has sent'
             ]
@@ -398,10 +404,10 @@ const cats = [
             title:'Kickstarter members',
             icon:'ti-user-star',
             items:[
-              'If the suspended member is a current Kickstarter: update their end date in the New Member Spreadsheet immediately',
+              "If the suspended member is a current Kickstarter: set the extended due date on their NMS app member page so their Reach Out week moves (update the NMS spreadsheet backup as needed)",
               'Check if any automations need to be shifted to match the new timeline'
             ],
-            tip:'A suspension that moves a KS end date but isn\'t updated in the spreadsheet will trigger the wrong rollover conversation at the wrong time.'
+            tip:"A suspension that moves a Kickstarter end date but isn't updated in the NMS app will trigger the wrong rollover conversation at the wrong time."
           }
         ]
       },
@@ -409,21 +415,45 @@ const cats = [
         id:'payments',num:10,title:'Payments & failed transactions',isNew:false,
         short:'Catch failed payments and outstanding balances',
         why:'Failed payments accumulate fees and create tension. Early identification is the difference between a retained member and a cancellation.',
-        items:[
-          'Check for failed payments',
-          'Check for outstanding balances',
-          'Check for pending bank update forms',
-          'If bank form pending: follow up via SMS',
-          'If multiple failed payments: create a task for a phone call',
-          'Consider escalation — payment plan or assistance — for complex situations',
-          'Desk (POS/cash) payments: confirm the matching invoice was marked paid or skipped, so it does not also go to debit (double-charge risk)',
-          'Look for duplicate invoices: same member, same membership, same amount within a few days',
-          'Every part payment, rescheduled payment, adjusted amount or skipped invoice needs a note explaining why',
-          'Casuals and memberships added at $0 need a note explaining why no payment was taken',
-          'Weekly Kickstarter with no payment at signup: check for a clear note explaining the delayed first payment, who agreed to it, and the agreed first-payment date and amount. Confirm the debit is scheduled accordingly; ask the staff member and record the explanation if it is missing',
-          'Check whether a failed debit also triggered a failed-payment fee'
+        sections:[
+          {
+            title:'Daily payment checks',
+            icon:'ti-credit-card',
+            items:[
+              "Check for failed payments and outstanding balances on the Payments tab. The profile Balance shows $0 even when payments have failed",
+              "Desk (POS/cash) payments: confirm the matching invoice was marked paid or skipped, so it does not also go to debit (double-charge risk)",
+              "Look for duplicate invoices: same member, same membership, same amount within a few days",
+              "Every part payment, rescheduled payment, adjusted amount or skipped invoice needs a note explaining why",
+              "Casuals and memberships added at $0 need a note explaining why no payment was taken",
+              "Weekly Kickstarter with no payment at signup: check for a clear note explaining the delayed first payment, who agreed to it, and the agreed first-payment date and amount",
+              "Check whether a failed debit also triggered a failed-payment fee (Clubworx doesn't record Ezidebit fees, check the Ezidebit portal)",
+              "Before stating how much was written off, check for a part payment added the same day"
+            ],
+            alert:"Payment issues are major. Double charges and failed-payment fees make members like the gym less, and then they don't roll over."
+          },
+          {
+            title:'Failed Payments tracker',
+            icon:'ti-receipt-off',
+            items:[
+              "Every final failed payment becomes a case in the Failed Payments tracker (it imports from Clubworx each morning)",
+              "We action what we can first: a personal SMS, rescheduling the payment, taking it at the desk, or sending the Bank Account Update form",
+              "If it needs a phone call: create a Phone call task for Richie or Mel, plus a check task for us the next day",
+              "Record every action in the tracker (Last Action + Notes) and in a Clubworx note",
+              "A skipped or rescheduled payment can make the tracker show the case as cleared when nothing was paid. Check the real result before closing it",
+              "Keep the owes-money flag on until the Payments tab shows everything paid"
+            ],
+            alert:"Keep failed-payment messages positive: ask if something's up with the card and offer options (pay at the counter, a new debit day, or the update form). Never word it as a debt demand."
+          },
+          {
+            title:'Card or bank changes',
+            icon:'ti-building-bank',
+            items:[
+              "Member's card expired or they want to change payment details: send the Bank Account Update form. Never take card numbers by SMS or phone",
+              "Until it's signed: note, red flag (kiosk off) and a task before the next debit",
+              "Once approved, the form updates Ezidebit straight away. The Clubworx wallet can still show the old card"
+            ]
+          }
         ],
-        alert:'Payment issues are major. Double charges and failed-payment fees make members like the gym less, and then they do not roll over.',
         tip:'Failed payment fees accumulate. The longer you wait, the harder the conversation — and the more likely the member cancels out of embarrassment.'
       },
       {
@@ -447,13 +477,14 @@ const cats = [
         items:[
           'Enter every issue found into the Clubworx Analysis – Staff Error Log on the day it is identified, before changing anything',
           'Minor setup items can be fixed straight away: profile photo flag, member number, missing note',
-          'Payment, pricing, refund and cancellation fixes wait for approval from Mel or Ram',
+          "Payment, pricing, refund and cancellation fixes wait for approval from Mel or Richie (the owners have the final say)",
+          "A decision made or approved by Mel or Richie is not a staff error once it is recorded in the note",
           'Add notes explaining every correction made',
           'Log small errors as well as critical errors',
           'Record the date, member, issue, likely cause, correction, staff involved, and whether escalation or training is required',
           'Do not treat correcting the issue in Clubworx as a substitute for logging it',
           'Record the staff member responsible using the profile activity log (e.g. "added by", "approved by")',
-          'Escalate to Mel if the issue cannot be resolved at admin level',
+          "Raise it with Mel or Richie if the issue cannot be resolved at admin level",
           'Review recurring error types to identify process and training gaps'
         ],
         alert:'The daily analysis is not complete until every identified error has been entered into the Clubworx Analysis – Staff Error Log.'
@@ -484,23 +515,24 @@ const cats = [
         tip:'A casual with no outcome note is a lead that hasn\'t been worked. Treat every casual as a conversion opportunity.'
       },
       {
-        id:'getfit-review',num:'E',title:'Clubworx and GetFit@ inbox coverage',isNew:false,
+        id:'getfit-review',num:'E',title:'Clubworx, getfit@ and miami@ inbox coverage',isNew:false,
         short:'Screen, action, reply to, and log every member request',
-        why:'Inbox coverage includes both screening and completing the required action. Clubworx and GetFit@ must show the same complete member timeline so billing and membership requests are not missed.',
+        why:'Inbox coverage includes both screening and completing the required action. Clubworx and the inboxes must show the same complete member timeline so billing and membership requests are not missed.',
         items:[
-          'Review the Clubworx and GetFit@ inboxes for member messages and automated alerts',
-          'When Jakob is away, the assigned coverage person must both screen and action incoming messages',
-          'Specifically check for cancellation, suspension, payment, injury, and membership-change requests',
-          'Do not leave a request unactioned after reading or screening it',
-          'Confirm the requested change was completed, the member was replied to, and the communication was logged',
-          'For each relevant email or reply: copy or record it in Clubworx notes on the correct date',
-          'Review open tasks in GetFit@ — confirm each has a matching task or note in Clubworx',
-          'If a GetFit@ task references a member not yet in Clubworx: create the Clubworx note immediately',
-          'If a request cannot be completed, assign it to a named person with a due date and escalate urgent billing matters immediately',
-          'Do not close the daily review until all inbox items are actioned or assigned'
+          "Review Clubworx messages and SMS replies, the getfit@ inbox and the miami@ (reception) inbox for member messages and automated alerts",
+          "The person on inbox coverage must both screen and action incoming messages",
+          "Specifically check for cancellation, suspension, payment, injury, and membership-change requests",
+          "Judge a thread by who sent the last message, not by its label: if the member wrote last, it still needs us",
+          "Do not leave a request unactioned after reading or screening it",
+          "Confirm the requested change was completed, the member was replied to, and the communication was logged",
+          "For each relevant email or reply: copy the member's message and our exact reply into the Clubworx note on the correct date",
+          "Review open tasks in getfit@ and confirm each has a matching task or note in Clubworx",
+          "If an inbox item references a member not yet in Clubworx: create the Clubworx note immediately",
+          "If a request cannot be completed, assign it to a named person with a due date and raise urgent billing matters with Mel or Richie straight away",
+          "Do not close the daily review until all inbox items are actioned or assigned"
         ],
         alert:'Screening is not the same as actioning. An unread or unactioned suspension request can result in an avoidable payment and refund request.',
-        tip:'GetFit@ and Clubworx are two separate systems that need to tell the same story. If a member issue lives in one and not the other, it will be missed.'
+        tip:'The inboxes and Clubworx are separate systems that need to tell the same story. If a member issue lives in one and not the other, it will be missed.'
       },
       {
         id:'review-notes-enquiry',num:11,title:'Review notes for leads',isNew:false,
@@ -513,6 +545,21 @@ const cats = [
           'If unclear: investigate the member profile and confirm action was taken'
         ],
         tip:'A note that was written and never actioned is worse than no note — it means the team saw the opportunity and ignored it.'
+      },
+      {
+        id:'messaging-rules',num:'S',title:'Messaging members and leads',isNew:true,
+        short:'How every SMS and email to members and leads should read',
+        why:"Consistent, friendly messages protect the member relationship and keep SMS costs down. These rules apply to every message staff send.",
+        items:[
+          "Start SMS with \"Urban Muaythai here\". No staff name, and no emojis (they make an SMS cost more credit)",
+          "Lead enquiries: never quote prices. Get them in for a class or on a call (ask for the best time to call or their number), and note the enquiry and our reply in Clubworx",
+          "Check-in and missed-class messages: don't offer a pause or hold unless the member asked for one",
+          "Don't contact a member about coming back before their suspension has ended. The automation creates a task after 7 days with no attendance",
+          "Failed payments: keep it positive and offer options, never a debt demand",
+          "Read the member's latest notes before messaging, so the message fits what's already been said",
+          "After sending, record the exact text in the Clubworx note"
+        ],
+        tip:"Reread every message as the member would before sending. If it could sound like a telling-off, rewrite it."
       }
     ]
   },
@@ -563,56 +610,48 @@ const cats = [
         tip:'Photos matter for culture. A faceless profile means coaches can\'t recognise members by name — which kills the personal connection.'
       },
       {
-        id:'cross-check',num:3,title:'Cross-check new member spreadsheet',isNew:false,
-        short:'Sync Clubworx with the New Member Spreadsheet',
-        why:'Clubworx and the New Member Spreadsheet must stay in sync. Discrepancies cause confusion during Pipeline Parties and rollover conversations.',
+        id:'cross-check',num:3,title:'Check the NMS app',isNew:false,
+        short:'The NMS app is the main new-member record',
+        why:"The Urban Army NMS app tracks every Kickstarter, trial and Short Term member through their program. It syncs with Clubworx every hour, so most of it fills itself, but staff must check what the sync can't decide.",
         items:[
-          'Confirm member is recorded in the New Member Spreadsheet',
-          'Confirm status: Rolled Over, No Rollover, or Short-Term Membership',
-          'Confirm colour coding matches actual status',
-          'Confirm salesperson is recorded correctly',
-          'Confirm KS type is recorded correctly',
-          'Confirm deposit status is recorded',
-          'Confirm membership sold is recorded',
-          'Confirm sold by is recorded',
-          'If member has rolled over: confirm Rolled Over Date is entered in the Kickstarter Master (Column P)',
-          'If member is STM: confirm STM date and membership are both recorded correctly',
-          'Identify members showing zero attendance after their intended start date',
-          'Move genuine non-starters from active Week tracking into “Waiting / Not Started”',
-          'Treat negative day values as a sign that the member is past their expected start date and requires review',
-          'Treat “Extended” as a suspension and manually move the member into the correct week when their timeline changes',
-          'Confirm each suspended or delayed member\'s week placement reflects their updated program timeline',
-          'Create outreach for non-starters to book or rebook their first session',
-          'Do not send regular Monday check-in messaging to someone who has not started',
-          'Confirm all dates are correct'
+          "Open the NMS app and check Data Health. Clear every issue (missing start date, overdue with no status, possible duplicates)",
+          "Admin › Clubworx update: review the items the sync held back (other new memberships, start-date mismatches)",
+          "New Kickstarters and trials: fill in intro source and sold by (from the #new-kickstarters Slack post)",
+          "Start Date = first class attended. The sync fills it from Clubworx, so check it looks right",
+          "Final status after the rollover conversation: Rolled Over, Straight to Membership, NO, Not Rolled Over, or Short Term, with the date",
+          "Not Rolled Over = attended 1–3 times, or said at the start they won't roll over. NO = trained multiple times but said no in the rollover chat. Straight to Membership = returning member",
+          "Suspended or delayed Kickstarters: set the extended due date on the member page so their Reach Out week moves",
+          "Members with zero attendance after their intended start: check the First Class page and create outreach to book or rebook",
+          "Do not send regular Monday check-in messaging to someone who has not started",
+          "The NMS spreadsheet is kept as a backup and updated as needed (the Daily Numbers sync still reads it)"
         ],
-        tip:'A member with zero attendance is not progressing through the program. Keep them in Waiting / Not Started until their first session has been completed.'
+        tip:"The app follows Kickstarter days for Reach Out weeks, and reports on Friday–Thursday weeks. If something looks off, check the member page before changing anything."
       },
       {
         id:'first-session-check',num:'1st',title:'First-session and non-starter check',isNew:false,
         short:'Confirm every expected first session and promptly rebook missed starts',
         why:'A new membership should not move through active Week tracking until the member has actually attended. Early outreach keeps delayed starters from quietly disengaging.',
         items:[
-          'Review all new members who were expected to attend their first session',
-          'Confirm whether the first attendance was completed',
-          'If they missed it, send a same-day or next-business-day rebooking message',
-          'Create a follow-up task with an owner and due date',
-          'Update the expected start date once the new session is confirmed',
-          'Update Clubworx and the New Member Spreadsheet together',
-          'Move the member into active Week tracking only after they have started'
+          "Open the NMS app First Class page. New Kickstarters, trials and Short Term members get a card automatically",
+          "Cards move from Open to Booked (check attended) and to Resolved once Clubworx shows them attending",
+          "Booked but didn't attend: send a same-day or next-business-day rebooking message and update the card",
+          "Create a follow-up task with an owner and due date",
+          "Update the expected start date once the new session is confirmed",
+          "The program timeline starts from their first attended class, not the date sold"
         ],
         alert:'Do not allow a non-starter to progress through active Week tracking. Their first completed attendance is the trigger to begin the program timeline.'
       },
       {
         id:'upcoming-ks',num:'K',title:'Upcoming KS end dates',isNew:false,
-        short:'Forward-check: who is ending their Kickstarter in the next 7 days',
+        short:'Forward-check: who is ending their Kickstarter soon',
         why:'Checking upcoming Kickstarter end dates allows the team to prepare rollover conversations and confirm the day-28 automation will fire on the correct date.',
         items:[
-          'In the Kickstarter Master, check for any member with a KS End Date in the next 7 days',
-          'For each upcoming end date: confirm their automation is set to fire on the correct date',
-          'Confirm they are listed in the Reach Out tab and assigned to a staff member for rollover conversation',
-          'If the day-28 rollover email has already been sent: confirm the outcome has been recorded in notes',
-          'If no rollover conversation has happened yet and end date is within 3 days: create an urgent task for immediate follow-up'
+          "In the NMS app, check Reach Out › Week 4 and Today › Final status needed",
+          "Confirm each member has an owner for the rollover conversation",
+          "Confirm their roll-over automations are set to fire on the correct date",
+          "If the day-28 rollover email has already been sent: confirm the outcome has been recorded in notes and the app",
+          "If no rollover conversation has happened and the end date is within 3 days: create an urgent task for immediate follow-up",
+          "Once they roll over, change the Clubworx membership the same day as the chat"
         ],
         tip:'The rollover conversation should never be a surprise. This forward-check turns the daily review from reactive admin into proactive retention.'
       }
@@ -717,7 +756,7 @@ const cats = [
               "Approving does NOT create a suspension, a cancellation or a plan change. You still do those on the profile",
               "Add a note with what was set up (plan, start date, first debit date and amount)",
               "Finish or roll any related task, and dismiss any 'waiver needed' flag only once the form is signed",
-              "New members: member number, photo flag if no photo, and the New Member Spreadsheet"
+              "New members: member number, photo flag if no photo, and check they appear in the NMS app"
             ]
           }
         ]
@@ -752,7 +791,7 @@ const cats = [
               "The Kickstarter form must be signed before the Kickstarter membership is added. Deposit taken and link sent the same day, waiting on the signature, is fine",
               "Upfront: $240 from 5 Oct 2026 (less only when a paid casual is credited). Weekly: 4 x $65",
               "Recurring debits must not start inside the 28 days. Upfront: first debit at least 4 weeks after the start date",
-              "Start date = first class. Update the New Member Spreadsheet",
+              "Start date = first class. Check the NMS app picked it up",
               "No Roll Over / FIFO members: set up as No Roll Over from the start"
             ]
           },
@@ -763,7 +802,7 @@ const cats = [
               "Check the plan they picked matches their age and class (e.g. a 12-year-old belongs in Teens, not Kids 7-10)",
               "Roll-over: change the membership the same day as the roll-over chat. End the trial or Kickstarter the day before, start the new plan that day, and keep their usual debit day",
               "Check the first debit date doesn't overlap a period already paid",
-              "Update the Kickstarter Master / New Member Spreadsheet status"
+              "Set the final status in the NMS app (and the NMS spreadsheet backup as needed)"
             ]
           },
           {
@@ -778,7 +817,7 @@ const cats = [
               "Saving fires the 'Suspension Added' email to the member, so confirm the dates before saving",
               "Medical holds: ask for the medical certificate. Once it arrives we process the hold ourselves"
             ],
-            alert:"Over the limits only as an approved exception (owner decision, organised gym tour, or medical proof), and the reason goes in the note."
+            alert:"Over the limits only as an exception decided by Mel or Richie (e.g. organised gym tour or medical proof), and the reason goes in the note."
           },
           {
             title:'Cancellation Form',
@@ -860,23 +899,58 @@ const cats = [
           'Look for red flags requiring escalation to Mel',
           'A note that needs follow-up must also have a flag (so all staff see it) and a task (so one person chases it) — a note alone is not enough',
           'If a note is something all staff should know, post it in Slack as well',
+          "Notes are short and plain, written so any staff member understands them. No task, invoice or case numbers",
+          "If you already added a note today for that member, update it rather than adding a new one",
+          "Before saying something is missing, read the full notes history: the reason is often in an older note, or staff pasted their email reply into the note",
           'If unclear: investigate the member profile and confirm action was taken'
         ],
         tip:'A note written and never actioned is worse than no note — it means the team saw the problem and ignored it.'
       },
       {
-        id:'flag-triggers',num:'F',title:'Red Flag and Orange Flag check',isNew:false,
-        short:'Does today\'s activity trigger a Red or Orange Flag for any member?',
-        why:'Low attendance, failed payments, suspension activity, and cancellation signals identified in Clubworx must flow directly into the Red and Orange Flag process.',
-        items:[
-          'After reviewing notes and activity, ask: does any member\'s behaviour today trigger a Red Flag?',
-          'Red Flag triggers: no class attendance in 14+ days, 2+ failed payments, member expressed intent to cancel in notes, suspension with no follow-up',
-          'If yes: add member to the Red Flag Tracker with the reason and date',
-          'Orange Flag triggers: KS member with no attendance in 7+ days, low attendance trend visible in notes',
-          'If yes: add to Orange Flag list for Wednesday SMS review',
-          'Document the flag action in Clubworx notes — there must be a paper trail'
-        ],
-        alert:'Flagging should happen on the same day you see the signal — not next week. A member at risk today who isn\'t flagged today will be harder to recover by the time the flag is raised.'
+        id:'flag-triggers',num:'F',title:'Red Flag and Orange Flag',isNew:false,
+        short:'The weekly attendance reach-outs: Red on Monday, Orange on Wednesday',
+        why:'Members who drop off are the biggest churn risk. The weekly Red and Orange Flag messages catch them early, and the daily review makes sure nobody slips through in between.',
+        sections:[
+          {
+            title:'Red Flag (Monday)',
+            icon:'ti-flag',
+            items:[
+              "Members with no classes in the last 7 days",
+              "The tracker builds the list. The head coach reviews it first (Head Coach Review) and ticks anyone to leave out",
+              "Leave out: members who trained since the list was built, are on suspension, are on a gym tour, or already got a personal message from staff that week",
+              "Send the bulk SMS with a template not used recently (check the Weekly Log), adults and kids separately",
+              "Log Reached Out / By / Type, then add the week's row to the Weekly Log"
+            ]
+          },
+          {
+            title:'Orange Flag (Wednesday)',
+            icon:'ti-flag-2',
+            items:[
+              "Members on 2x, 3x or unlimited plans who trained at least once but below their target in the last 7 days",
+              "Check each member really is orange before sending (sessions, nothing yet this week)",
+              "Kickstarter members on the orange list get a phone call, not an SMS (Head Coach Call List)",
+              "Same exclusions, same template rotation and logging as Red Flag"
+            ]
+          },
+          {
+            title:'Replies and comebacks',
+            icon:'ti-message-check',
+            items:[
+              "Log every reply (date, what they said) and answer it if it needs an answer",
+              "Mid-week: record who has come back so far. End of week: mark non-repliers 'No' and fill the final comeback counts",
+              "Anything that needs action (injury, pause, cancel) gets a Clubworx note, flag and task"
+            ]
+          },
+          {
+            title:'Daily check',
+            icon:'ti-alert-triangle',
+            items:[
+              "During the daily review, ask: does any member need a reach-out before the next flag day (cancel intent in notes, suspension ending with no follow-up, 2+ failed payments)?",
+              "If yes: create a task now and note it in Clubworx. Don't wait for the weekly list"
+            ],
+            alert:"Act on the same day you see the signal — not next week. A member at risk today who isn't followed up today will be harder to recover."
+          }
+        ]
       },
       {
         id:'create-tasks',num:12,title:'Create and assign tasks',isNew:false,
@@ -887,20 +961,24 @@ const cats = [
           'Assign task to the correct staff member',
           'Set a clear action: call, follow-up, or booking',
           'Set a due date on every task',
-          'Confirm no lead or member is left without an assigned action'
+          'Confirm no lead or member is left without an assigned action',
+          "Action a task before closing it. Close it once the member is back training, has replied with an outcome, or has cancelled",
+          "If it can't be finished yet: add a dated note, move the due date about a week, set it to In Progress, and repeat until it's resolved",
+          "Work overdue tasks first",
+          "Calls go to Richie or Mel as a Phone call task. Add a matching check task for yourself the next day"
         ],
         tip:'Unassigned tasks and missing due dates are the two biggest reasons follow-ups are missed. Both are non-negotiable.'
       },
       {
         id:'daily-numbers-update',num:'D',title:'Daily Numbers Spreadsheet update',isNew:false,
-        short:'Record today\'s numbers before closing the review',
-        why:'The Clubworx Analysis is the source for daily intros, rollovers, STM conversions, cancellations, and net growth. The review is not complete until those figures are reflected in the Daily Numbers Spreadsheet.',
+        short:'Make sure the numbers reflect the day before closing the review',
+        why:'The Clubworx Analysis is the source for daily intros, rollovers, Short Term and straight-to-membership conversions, cancellations, and net growth. The review is not complete until those figures are right.',
         items:[
-          'Open the Daily Numbers Spreadsheet',
-          'Enter the following from today\'s Clubworx review: new intros, rollovers recorded, STM conversions, cancellations, net growth figure',
-          'If the sync script runs automatically: confirm it has run correctly and data matches Clubworx',
-          'If data discrepancy: manually correct and add a note explaining the difference',
-          'Do not close the daily review until the Daily Numbers Spreadsheet reflects today\'s activity'
+          "The Daily Numbers sync runs automatically. Confirm it ran and the figures match Clubworx and the NMS app",
+          "The sync reads the NMS spreadsheet, so update the backup sheet first when it's behind the app",
+          "Reporting weeks run Friday to Thursday",
+          "Cancellations count autopay memberships only. Kickstarters, trials and Short Term are never counted as cancellations",
+          "If the data doesn't match: correct it and add a note explaining the difference"
         ],
         tip:'The Daily Numbers Spreadsheet is what Mel uses for reporting and what drives the weekly review. Stale or missing data here has a direct knock-on effect on every decision made above you.'
       },
@@ -916,7 +994,8 @@ const cats = [
           'Email replies are recorded in Clubworx notes on the correct date',
           'All waivers have been checked',
           'All errors have been entered in the Clubworx Analysis – Staff Error Log (and corrected where approved)',
-          'Clubworx and GetFit@ inbox items have been actioned or assigned',
+          "Clubworx, getfit@ and miami@ inbox items have been actioned or assigned",
+          "NMS app checked (Data Health, First Class, Reach Out Week 4)",
           'New-member first sessions and non-starters have been checked',
           'Red and Orange Flag triggers have been assessed',
           'Daily Numbers Spreadsheet has been updated',
@@ -951,8 +1030,8 @@ const cats = [
         why:'Failed payments, low attendance, suspensions, and missing follow-up notes are connected churn signals. Reviewing them together turns the Clubworx Analysis into an active retention check.',
         items:[
           'After completing all review steps, run this churn signal checklist before closing:',
-          'Member with 2 or more failed payments — create phone call task, consider escalation',
-          'Member with no class attendance in 14+ days — add to Red Flag Tracker',
+          "Member with 2 or more failed payments: check the Failed Payments tracker case; if it needs a call, task Richie or Mel",
+          "Member with no classes in the last 7 days: they'll be on Monday's Red Flag list. If there's a clear risk (cancel intent, injury), act now",
           'Member with a suspension ending soon and no follow-up task — create task now',
           'Member whose notes show no staff contact in 7+ days — create reach-out task',
           'Kickstarter member with KS end date in the next 3 days and no rollover recorded — urgent task for same-day contact',
@@ -966,7 +1045,7 @@ const cats = [
         why:'Not every error can or should be fixed at admin level. Knowing the escalation threshold protects both the member experience and the business.',
         items:[
           'Log every error first; fix minor setup items straight away and document with notes',
-          'Escalate to Mel: membership applied incorrectly, payment dispute, member complaint, anything affecting billing over $50',
+          "Raise with Mel or Richie: membership applied incorrectly, payment dispute, member complaint, anything affecting billing over $50",
           'Add notes on every correction — even small ones',
           'Track error patterns weekly to identify team training gaps'
         ],
@@ -979,26 +1058,27 @@ const cats = [
         ]
       },
       {
-        id:'mel-escalation',num:'M',title:'Mel escalation protocol',isNew:false,
-        short:'What to escalate to Mel and when — same day vs weekly report',
+        id:'mel-escalation',num:'M',title:'Owner escalation (Mel and Richie)',isNew:false,
+        short:'What to raise with Mel or Richie and when — same day vs weekly report',
         why:'Clear escalation triggers separate issues that need same-day action from patterns that belong in the mid-week check or weekly report.',
         escalations:[
-          {trigger:'Waiver missing for member who has already attended class',when:'Same day',how:'Slack or direct message to Mel'},
+          {trigger:'Waiver missing for member who has already attended class',when:'Same day',how:'Slack Mel or Richie'},
           {trigger:'Payment dispute or billing error over $50',when:'Same day',how:'Slack + note in Clubworx'},
           {trigger:'Incorrect membership causing ongoing incorrect billing',when:'Same day',how:'Slack + correct in Clubworx once approved'},
           {trigger:'In-agreement cancellation without the required charge or a documented valid exception',when:'Same day',how:'Slack with member name, agreement end date and amount at stake'},
           {trigger:'Member complaint raised in notes by staff',when:'Same day',how:'Slack with member name and summary'},
           {trigger:'KS member cancellation during trial period',when:'Same day',how:'Slack — impacts rollover rate'},
           {trigger:'Refund or credit requested after an already-processed payment',when:'Same day',how:'Escalate with the complete dated timeline'},
-          {trigger:'Missing recurring payment on an active membership',when:'Same day',how:'Correct if authorised and notify Mel'},
-          {trigger:'Suspension outside the standard policy',when:'Before applying',how:'Obtain approval and document the exception'},
+          {trigger:'Missing recurring payment on an active membership',when:'Same day',how:'Correct if authorised and tell Mel or Richie'},
+          {trigger:'Suspension outside the standard policy',when:'Before applying',how:'Mel or Richie decide; record their decision in the note'},
           {trigger:'Clubworx HTML or email-link failure',when:'Same day if campaign affected',how:'Track with Clubworx support and use a safe temporary alternative'},
           {trigger:'Low rollover rate trending below 80%',when:'Weekly report + mid-week if critical',how:'Mid-week email or report'},
           {trigger:'Recurring error from same staff member (3+ times)',when:'Weekly report',how:'Flag in report with pattern noted'},
           {trigger:'High cancellation day (3+ cancellations)',when:'Weekly report + flag in Daily Numbers',how:'Flag in report'},
         ],
         items:[
-          'When escalating to Mel: always include member name, what happened, what action was taken or is needed',
+          "Mel and Richie are the owners and have the final say. Ask for their decision; don't question what they did or approved",
+          "When raising something: include the member name, what happened, what's already been done, and the decision needed",
           'Do not wait for the weekly report for same-day triggers — these need immediate attention',
           'Add a note in Clubworx confirming escalation was made, with date and time'
         ]
@@ -1036,7 +1116,7 @@ const cats = [
         items:[
           'For every new Kickstarter member: confirm automation end date matches their actual KS end date',
           'If KS end date has shifted (suspension, late start): update automation immediately',
-          'Cross-reference with New Member Spreadsheet dates before confirming'
+          "Cross-reference with the NMS app dates before confirming"
         ],
         tip:'The rollover email is often the first formal touchpoint about committing to membership. Getting the timing right is part of the conversion process.'
       },
@@ -1070,7 +1150,7 @@ const cats = [
           'When the review is complete, open the Daily Completion Log tab in the Clubworx Error spreadsheet below',
           'Enter one row per day with: date reviewed, reviewed by, time completed, any errors corrected, and any escalations made',
           'Confirm the Clubworx Analysis – Staff Error Log was completed for the review date',
-          'Send Mel an end-of-day email with the errors found that day and any notes that need following up',
+          "Send Mel an end-of-day audit email. Sections: 1 daily audit (errors), 2 payments, 3 cancellation and suspension requests, 4 new members and roll-overs, 5 follow-ups, 6 staff notes check, 7 inboxes (getfit@ and miami@), then anything that needs her decision",
           'If no errors were found, record “No errors identified” rather than leaving the day blank',
           'Confirm inbox coverage was completed and all cancellation and suspension requests were actioned or assigned',
           'Record any refund or credit decisions still awaiting management approval',
